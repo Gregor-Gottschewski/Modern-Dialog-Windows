@@ -1,0 +1,10 @@
+/* Button global */
+.button {
+    -fx-background-radius: 5;
+    -fx-border-width: 0;
+}
+
+/* Header */
+#header-box {
+    -fx-background-radius: 5;
+}
