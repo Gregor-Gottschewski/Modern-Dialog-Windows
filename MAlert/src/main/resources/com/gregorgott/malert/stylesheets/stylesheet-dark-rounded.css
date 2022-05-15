@@ -1,0 +1,28 @@
+/* Dark background with rounded corners */
+
+.root {
+    -fx-background-color: #2d2d2d;
+}
+
+.label {
+    -fx-text-fill: white;
+}
+
+/* Button global */
+.button {
+    -fx-background-color: #3b3b3b;
+    -fx-border-color: #464646;
+    -fx-background-radius: 5;
+    -fx-border-width: 0;
+    -fx-text-fill: white;
+}
+
+.button:pressed {
+    -fx-background-color: #464646;
+}
+
+/* Header */
+#header-box {
+    -fx-background-color: #464646;
+    -fx-background-radius: 5;
+}

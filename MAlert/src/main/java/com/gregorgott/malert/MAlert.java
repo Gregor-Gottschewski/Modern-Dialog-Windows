@@ -24,8 +24,8 @@ import java.util.Objects;
  * These Stages can contain a header, content text, buttons and an image.
  *
  * @author GregorGott
- * @version 0.0.1
- * @since 2022-05-14
+ * @version 0.0.2
+ * @since 2022-05-15
  */
 public class MAlert {
     private final MAlertType mAlertType;
@@ -58,8 +58,8 @@ public class MAlert {
 
         scene = new Scene(borderPane);
 
-        // Set the alert style to apply the stylesheet
-        mAlertStyle = MAlertStyle.CLASSIC;
+        // Set the alert style to 'CLASSIC' and apply the stylesheet
+        mAlertStyle = MAlertStyle.LIGHT_CLASSIC;
         setStylesheet();
 
         stage = new Stage();
@@ -114,10 +114,18 @@ public class MAlert {
      */
     private void setStylesheet() {
         switch (mAlertStyle) {
-            case CLASSIC ->
-                    scene.getStylesheets().add(getClass().getResource("stylesheets/stylesheet-classic.css").toExternalForm());
-            case ROUNDED ->
-                    scene.getStylesheets().add(getClass().getResource("stylesheets/stylesheet-rounded.css").toExternalForm());
+            case LIGHT_CLASSIC ->
+                    scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(
+                            "stylesheets/stylesheet-light-classic.css")).toExternalForm());
+            case LIGHT_ROUNDED ->
+                    scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(
+                            "stylesheets/stylesheet-light-rounded.css")).toExternalForm());
+            case DARK_CLASSIC ->
+                    scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(
+                            "stylesheets/stylesheet-dark-classic.css")).toExternalForm());
+            case DARK_ROUNDED ->
+                    scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(
+                            "stylesheets/stylesheet-dark-rounded.css")).toExternalForm());
         }
     }
 
@@ -287,7 +295,9 @@ public class MAlert {
     }
 
     public enum MAlertStyle {
-        ROUNDED,
-        CLASSIC
+        LIGHT_ROUNDED,
+        LIGHT_CLASSIC,
+        DARK_ROUNDED,
+        DARK_CLASSIC
     }
 }
