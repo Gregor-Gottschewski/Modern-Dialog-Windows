@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.gregorgott</groupId>
-    <artifactId>MAlert</artifactId>
-    <version>0.0.1</version>
-    <name>MAlert</name>
+    <artifactId>MDialogWindows</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>MDialogWindows</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -45,7 +45,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.9.0</version>
+                <version>3.10.1</version>
                 <configuration>
                     <source>18</source>
                     <target>18</target>
@@ -60,7 +60,8 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.gregorgott.malert/com.gregorgott.malert.HelloApplication</mainClass>
+                            <mainClass>com.gregorgott.mdialogwindows/com.gregorgott.mdialogwindows.HelloApplication
+                            </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>

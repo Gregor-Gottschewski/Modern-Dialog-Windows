@@ -1,4 +1,4 @@
-/* Light background with rounded corners */
+/* Light background with angular corners */
 
 .root {
     -fx-background-color: #f3f3f3;
@@ -8,12 +8,18 @@
     -fx-text-fill: black;
 }
 
+.text-field {
+    -fx-background-color: #e3e3e3;
+    -fx-background-radius: 0;
+    -fx-text-fill: black;
+}
+
 /* Button global */
 .button {
     -fx-background-color: #d0d0d0;
     -fx-border-color: #ababab;
-    -fx-background-radius: 5;
-    -fx-border-width: 0;
+    -fx-border-width: 1;
+    -fx-border-radius: 0;
     -fx-text-fill: black;
 }
 
@@ -24,5 +30,5 @@
 /* Header */
 #header-box {
     -fx-background-color: #e3e3e3;
-    -fx-background-radius: 5;
+    -fx-border-radius: 0;
 }

@@ -8,6 +8,12 @@
     -fx-text-fill: white;
 }
 
+.text-field {
+    -fx-background-color: #464646;
+    -fx-background-radius: 5;
+    -fx-text-fill: white;
+}
+
 /* Button global */
 .button {
     -fx-background-color: #3b3b3b;
