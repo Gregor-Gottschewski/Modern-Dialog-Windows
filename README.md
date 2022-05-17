@@ -2,7 +2,7 @@
 
 ![Language: Java](https://img.shields.io/badge/Language-Java-informational)
 ![Framework: JavaFX](https://img.shields.io/badge/Framework-JavaFX-informational)
-![Version: 0.0.1](https://img.shields.io/badge/Version-0.0.1-red)
+![Version: 0.0.2](https://img.shields.io/badge/Version-0.0.2-red)
 ![Stable Release: 08.05.2022](https://img.shields.io/badge/Stable_Release-8th_June_2022-yellow)
 
 >Modern-Dialog-Windows are JavaFX libraries with modern-looking alerts. They are a user-friendly alternative to the normal JavaFX alerts.
@@ -22,19 +22,10 @@ And to do that, Modern-Dialog-Windows returns a Stage on which you can change ev
 
 ## Alerts overview table
 | Name            | Version | Released               |
-| --------------- | ------- | ---------------------- |
+|-----------------|---------|------------------------|
 | MAlert          | 0.0.1   | Yes                    |
-| MTextInputAlert | -       | No (Planned for 0.0.2) |
-| MImageAlert     | -       | No                     |
-
-## Important Beta Informations.
-> Modern-Dialog-Windows is currently a beta.
-
-> MAlert is one Alert, more will be added during the beta phase.
-
-Currently, all Modern-Dialog-Windows are saved in separate folders. That is only
-because the program is still in beta. The final release will be bundled
-in one library.
+| MTextInputAlert | 0.0.1   | Yes                    |
+| MImageAlert     | -       | No (Planned for 0.0.3) |
 
 ## Small example of MAlert
 Let us create this warning:
