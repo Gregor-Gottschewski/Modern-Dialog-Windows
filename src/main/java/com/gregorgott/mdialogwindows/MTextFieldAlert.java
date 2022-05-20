@@ -19,8 +19,8 @@ import java.util.Objects;
  * It can return the entered text.
  *
  * @author GregorGott
- * @version 0.0.1
- * @since 2022-05-16
+ * @version 0.0.2
+ * @since 2022-05-20
  */
 public class MTextFieldAlert extends MDialogWindow {
     private final Stage stage;
@@ -57,14 +57,13 @@ public class MTextFieldAlert extends MDialogWindow {
     /**
      * Calls the first constructor and sets the Stage title.
      *
-     * @param text the title of the Stage.
+     * @param title the title of the Stage.
      * @since 0.0.1
      */
-    public MTextFieldAlert(String text) {
+    public MTextFieldAlert(String title) {
         this();
 
-        stage.setTitle(text);
-        setAlertTitle(text);
+        setAlertTitle(title);
     }
 
     /**
@@ -150,7 +149,7 @@ public class MTextFieldAlert extends MDialogWindow {
         borderPane.setPadding(new Insets(15));
         borderPane.setTop(headerLabel);
         borderPane.setCenter(textFieldHBox);
-        borderPane.setBottom(getButtons());
+        borderPane.setBottom(getButtons(60, 10));
 
         stage.setTitle(getAlertTitle());
         stage.setScene(scene);

@@ -19,8 +19,8 @@ import java.util.Objects;
  * When a <code>MAlertType</code> is chosen it also shows a small icon to the corresponding <code>MAlertType</code>.
  *
  * @author GregorGott
- * @version 0.1.0
- * @since 2022-05-16
+ * @version 0.1.1
+ * @since 2022-05-20
  */
 public class MAlert extends MDialogWindow {
     private final Stage stage;
@@ -63,7 +63,6 @@ public class MAlert extends MDialogWindow {
         this(mAlertType);
 
         // Set Stage title
-        stage.setTitle(text);
         setAlertTitle(text);
     }
 
@@ -154,7 +153,7 @@ public class MAlert extends MDialogWindow {
         borderPane.setPadding(new Insets(15));
         borderPane.setTop(topHBox);
         borderPane.setCenter(contentText);
-        borderPane.setBottom(getButtons());
+        borderPane.setBottom(getButtons(60, 10));
 
         stage.setTitle(getAlertTitle());
         stage.setScene(scene);

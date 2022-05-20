@@ -16,8 +16,8 @@ import java.util.ArrayList;
  * It controls the button actions, header and content text.
  *
  * @author GregorGott
- * @version 0.0.1
- * @since 2022-05-15
+ * @version 0.0.2
+ * @since 2022-05-20
  */
 public class MDialogWindow {
     private final ArrayList<Button> buttonArrayList;
@@ -137,13 +137,13 @@ public class MDialogWindow {
      *
      * @since 0.0.1
      */
-    public Node getButtons() {
+    public Node getButtons(int width, int spacing) {
         HBox bottomHBox = new HBox();
         bottomHBox.setAlignment(Pos.CENTER_RIGHT);
-        bottomHBox.setSpacing(10);
+        bottomHBox.setSpacing(spacing);
 
         for (Button button : buttonArrayList) {
-            button.setMinWidth(60);
+            button.setMinWidth(width);
             bottomHBox.getChildren().add(button);
         }
 
