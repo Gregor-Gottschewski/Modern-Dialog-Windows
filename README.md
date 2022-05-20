@@ -2,12 +2,14 @@
 
 ![Language: Java](https://img.shields.io/badge/Language-Java-informational)
 ![Framework: JavaFX](https://img.shields.io/badge/Framework-JavaFX-informational)
-![Version: 0.0.2](https://img.shields.io/badge/Version-0.0.2-red)
-![Stable Release: 08.05.2022](https://img.shields.io/badge/Stable_Release-8th_June_2022-yellow)
+![Version: 0.0.3](https://img.shields.io/badge/Version-0.0.3-red)
+![Stable Release: 14th June 2022](https://img.shields.io/badge/Stable_Release-14th_June_2022-yellow)
 
->Modern-Dialog-Windows are JavaFX libraries with modern-looking alerts. They are a user-friendly alternative to the normal JavaFX alerts.
+> Modern-Dialog-Windows are JavaFX libraries with modern-looking alerts. They are a user-friendly alternative to the
+> normal JavaFX alerts.
 
 ## Looks Awesome. Is Awesome To Use.
+
 **Similar to JavaFX alerts, but with more adaptability.**
 
 You can choose between
@@ -16,18 +18,21 @@ To make the button handling easier, Modern-Dialog-Windows uses normal buttons yo
 can create with custom text and a custom ActionEvent.
 
 ## Based on Stages.
+
 The idea behind Modern-Dialog-Windows is that you can customize everything you want.
 And to do that, Modern-Dialog-Windows returns a Stage on which you can change everything
 (e.g. you can apply your custom stylesheets).
 
-## Alerts overview table
-| Name            | Version | Released               |
-|-----------------|---------|------------------------|
-| MAlert          | 0.0.1   | Yes                    |
-| MTextInputAlert | 0.0.1   | Yes                    |
-| MImageAlert     | -       | No (Planned for 0.0.3) |
+## Alerts overview.
 
-## Small example of MAlert
+| Name            | Version | Released |
+|-----------------|---------|----------|
+| MAlert          | 0.1.1   | Yes      |
+| MTextInputAlert | 0.0.2   | Yes      |
+| MImageAlert     | 0.0.1   | Yes      |
+
+## MAlert Sneak Peek.
+
 Let us create this warning:
 
 ![Example](images/example.png)
@@ -47,4 +52,5 @@ Optional to show the alert:
     stage.show();
 
 ## You want to see Modern-Dialog-Windows in action?
+
 Word Guesser uses MAlerts: [GitHub Word Guesser](https://github.com/GregorGott/Word-Guesser)
