@@ -2,8 +2,8 @@
 
 ![Language: Java](https://img.shields.io/badge/Language-Java-informational)
 ![Framework: JavaFX](https://img.shields.io/badge/Framework-JavaFX-informational)
-![Version: 0.0.3](https://img.shields.io/badge/Version-0.0.3-red)
-![Stable Release: 14th June 2022](https://img.shields.io/badge/Stable_Release-14th_June_2022-yellow)
+![Version: 0.0.4](https://img.shields.io/badge/Version-0.0.4-red)
+![Stable Release: 20th June 2022](https://img.shields.io/badge/Stable_Release-20th_June_2022-yellow)
 
 > Modern-Dialog-Windows are JavaFX libraries with modern-looking alerts. They are a user-friendly alternative to the
 > normal JavaFX alerts.
@@ -30,6 +30,7 @@ And to do that, Modern-Dialog-Windows returns a Stage on which you can change ev
 | MAlert          | 0.1.1   | Yes      |
 | MTextInputAlert | 0.0.2   | Yes      |
 | MImageAlert     | 0.0.1   | Yes      |
+| MWelcomeAlert   | 0.0.1   | Yes      |
 
 ## MAlert Sneak Peek.
 
@@ -45,12 +46,8 @@ Code:
     mAlert.setHeadline("A very informative headline.");
     mAlert.setContentText("Looks modern and familiar. And it is very simple to use.");
     mAlert.addButton("My custom button", x -> System.out.println("Hello"), true);
-
-Optional to show the alert:
-
-    Stage stage = mAlert.getStage();
-    stage.show();
+    mAlert.getStage().show();
 
 ## You want to see Modern-Dialog-Windows in action?
 
-Word Guesser uses MAlerts: [GitHub Word Guesser](https://github.com/GregorGott/Word-Guesser)
+Word Guesser uses MAlerts (Version: 0.0.2): [GitHub Word Guesser](https://github.com/GregorGott/Word-Guesser)
