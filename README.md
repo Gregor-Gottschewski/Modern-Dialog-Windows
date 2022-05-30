@@ -2,7 +2,7 @@
 
 ![Language: Java](https://img.shields.io/badge/Language-Java-informational)
 ![Framework: JavaFX](https://img.shields.io/badge/Framework-JavaFX-informational)
-![Version: 0.0.4](https://img.shields.io/badge/Version-0.0.4-red)
+![Version: 0.0.5](https://img.shields.io/badge/Version-0.0.5-red)
 ![Stable Release: 20th June 2022](https://img.shields.io/badge/Stable_Release-20th_June_2022-yellow)
 
 > Modern-Dialog-Windows are JavaFX libraries with modern-looking alerts. They are a user-friendly alternative to the
@@ -25,12 +25,13 @@ And to do that, Modern-Dialog-Windows returns a Stage on which you can change ev
 
 ## Alerts overview.
 
-| Name            | Version | Released |
-|-----------------|---------|----------|
-| MAlert          | 0.1.1   | Yes      |
-| MTextInputAlert | 0.0.2   | Yes      |
-| MImageAlert     | 0.0.1   | Yes      |
-| MWelcomeAlert   | 0.0.1   | Yes      |
+| Name              | Version | Released                      |
+|-------------------|---------|-------------------------------|
+| MAlert            | 0.1.1   | Yes                           |
+| MTextInputAlert   | 0.0.2   | Yes                           |
+| MImageAlert       | 0.0.1   | Yes                           |
+| MWelcomeAlert     | 0.0.2   | Yes                           |
+| MInformationAlert | -       | No (Planned for next release) |
 
 ## MAlert Sneak Peek.
 
@@ -47,6 +48,11 @@ Code:
     mAlert.setContentText("Looks modern and familiar. And it is very simple to use.");
     mAlert.addButton("My custom button", x -> System.out.println("Hello"), true);
     mAlert.getStage().show();
+
+## More Screenshots.
+
+![MTextInputAlert](images/mtia_example.png)
+![MTextInputAlert](images/mwa_example.png)
 
 ## You want to see Modern-Dialog-Windows in action?
 

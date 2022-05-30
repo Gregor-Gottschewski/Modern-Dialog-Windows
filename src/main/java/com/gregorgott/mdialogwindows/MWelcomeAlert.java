@@ -4,6 +4,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -20,8 +21,8 @@ import java.util.Objects;
  * These widgets contain an image, header and content text.
  *
  * @author GregorGott
- * @version 0.0.1
- * @since 2022-05-25
+ * @version 0.0.2
+ * @since 2022-05-30
  */
 public class MWelcomeAlert extends MDialogWindow {
     private final Stage stage;
@@ -42,9 +43,16 @@ public class MWelcomeAlert extends MDialogWindow {
 
         mAlertStyle = MWelcomeAlert.MAlertStyle.LIGHT_ROUNDED;
 
+        // VBox contains all widgets
         centerVBox = new VBox();
+
+        // Scroll pane contains the v box
+        ScrollPane widgetScrollPane = new ScrollPane(centerVBox);
+        widgetScrollPane.setFitToWidth(true);
+        widgetScrollPane.setPadding(new Insets(5));
+
         borderPane = new BorderPane();
-        borderPane.setCenter(centerVBox);
+        borderPane.setCenter(widgetScrollPane);
 
         scene = new Scene(borderPane);
 
@@ -103,6 +111,10 @@ public class MWelcomeAlert extends MDialogWindow {
                     "stylesheets/stylesheet-light-rounded.css")).toExternalForm());
             case DARK_ROUNDED -> scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(
                     "stylesheets/stylesheet-dark-rounded.css")).toExternalForm());
+            case LIGHT_CLASSIC -> scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(
+                    "stylesheets/stylesheet-light-classic.css")).toExternalForm());
+            case DARK_CLASSIC -> scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(
+                    "stylesheets/stylesheet-dark-classic.css")).toExternalForm());
         }
     }
 
@@ -178,6 +190,8 @@ public class MWelcomeAlert extends MDialogWindow {
 
     public enum MAlertStyle {
         LIGHT_ROUNDED,
-        DARK_ROUNDED
+        LIGHT_CLASSIC,
+        DARK_ROUNDED,
+        DARK_CLASSIC
     }
 }
