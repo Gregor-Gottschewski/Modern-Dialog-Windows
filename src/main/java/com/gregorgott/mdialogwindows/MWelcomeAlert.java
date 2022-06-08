@@ -21,8 +21,8 @@ import java.util.Objects;
  * These widgets contain an image, header and content text.
  *
  * @author GregorGott
- * @version 0.0.2
- * @since 2022-05-30
+ * @version 0.0.3
+ * @since 2022-06-08
  */
 public class MWelcomeAlert extends MDialogWindow {
     private final Stage stage;
@@ -41,8 +41,6 @@ public class MWelcomeAlert extends MDialogWindow {
     public MWelcomeAlert() {
         super();
 
-        mAlertStyle = MWelcomeAlert.MAlertStyle.LIGHT_ROUNDED;
-
         // VBox contains all widgets
         centerVBox = new VBox();
 
@@ -55,6 +53,8 @@ public class MWelcomeAlert extends MDialogWindow {
         borderPane.setCenter(widgetScrollPane);
 
         scene = new Scene(borderPane);
+
+        setAlertStyle(MAlertStyle.LIGHT_ROUNDED);
 
         stage = new Stage();
         stage.setWidth(350);
@@ -161,16 +161,27 @@ public class MWelcomeAlert extends MDialogWindow {
         contentTextLabel.setFont(new Font("Helvetica", 13));
         contentTextLabel.setWrapText(true);
 
-        VBox topVBox = new VBox(headerLabel, contentTextLabel);
+        VBox topVBox = new VBox();
         topVBox.setPadding(new Insets(10));
         topVBox.setId("header-box");
+
+        if (getHeadline() != null) {
+            topVBox.getChildren().add(headerLabel);
+        }
+
+        if (getContentText() != null) {
+            topVBox.getChildren().add(contentTextLabel);
+        }
 
         centerVBox.setSpacing(15);
         centerVBox.setPadding(new Insets(10, 0, 0, 0));
 
         borderPane.setPadding(new Insets(15));
-        borderPane.setTop(topVBox);
         borderPane.setBottom(getButtons(60, 10));
+
+        if (getHeadline() != null || getContentText() != null) {
+            borderPane.setTop(topVBox);
+        }
 
         stage.setTitle(getAlertTitle());
         stage.setScene(scene);

@@ -22,7 +22,9 @@ import java.util.ArrayList;
 public class MDialogWindow {
     private final ArrayList<Button> buttonArrayList;
     private ImageView alertImageView;
-    private String alertTitle, headline, contentText;
+    private String alertTitle;
+    private String headline;
+    private String contentText;
 
     /**
      * Initializes the <code>buttonArrayList</code> which will contains all buttons.

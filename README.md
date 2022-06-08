@@ -2,10 +2,10 @@
 
 ![Language: Java](https://img.shields.io/badge/Language-Java-informational)
 ![Framework: JavaFX](https://img.shields.io/badge/Framework-JavaFX-informational)
-![Version: 0.0.5](https://img.shields.io/badge/Version-0.0.5-red)
+![Version: 0.0.6](https://img.shields.io/badge/Version-0.0.6-red)
 ![Stable Release: 20th June 2022](https://img.shields.io/badge/Stable_Release-20th_June_2022-yellow)
 
-> Modern-Dialog-Windows are JavaFX libraries with modern-looking alerts. They are a user-friendly alternative to the
+> Modern-Dialog-Windows is a JavaFX library with modern-looking alerts. They are a user-friendly alternative to the
 > normal JavaFX alerts.
 
 ## Looks Awesome. Is Awesome To Use.
@@ -27,11 +27,10 @@ And to do that, Modern-Dialog-Windows returns a Stage on which you can change ev
 
 | Name              | Version | Released                      |
 |-------------------|---------|-------------------------------|
-| MAlert            | 0.1.1   | Yes                           |
-| MTextInputAlert   | 0.0.2   | Yes                           |
+| MAlert            | 0.1.2   | Yes                           |
+| MTextInputAlert   | 0.0.3   | Yes                           |
 | MImageAlert       | 0.0.1   | Yes                           |
-| MWelcomeAlert     | 0.0.2   | Yes                           |
-| MInformationAlert | -       | No (Planned for next release) |
+| MWelcomeAlert     | 0.0.3   | Yes                           |
 
 ## MAlert Sneak Peek.
 
@@ -54,6 +53,7 @@ Code:
 ![MTextInputAlert](images/mtia_example.png)
 ![MTextInputAlert](images/mwa_example.png)
 
-## You want to see Modern-Dialog-Windows in action?
+## You want to see Modern-Dialog-Windows in Action?
 
-Word Guesser uses MAlerts (Version: 0.0.2): [GitHub Word Guesser](https://github.com/GregorGott/Word-Guesser)
+Word Guesser uses Modern-Dialog-Windows (Version: 0.0.2): [GitHub Word Guesser](https://github.com/GregorGott/Word-Guesser)
+Math Trainer uses Modern-Dialog-Windows (Version: 0.0.5): [GitHub Math Trainer](https://github.com/GregorGott/Math-Trainer)

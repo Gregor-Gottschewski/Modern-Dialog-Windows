@@ -39,6 +39,8 @@ public class MImageAlert extends MDialogWindow {
 
         scene = new Scene(borderPane);
 
+        setAlertStyle(MAlertStyle.LIGHT);
+
         stage = new Stage();
         stage.setResizable(false);
         stage.setScene(scene);
@@ -75,7 +77,7 @@ public class MImageAlert extends MDialogWindow {
      * @param mAlertStyle the <code>MAlertStyle</code>.
      * @since 0.0.1
      */
-    public void setmAlertStyle(MAlertStyle mAlertStyle) {
+    public void setAlertStyle(MAlertStyle mAlertStyle) {
         this.mAlertStyle = mAlertStyle;
         setStylesheet();
     }

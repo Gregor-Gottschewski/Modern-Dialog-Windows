@@ -19,8 +19,8 @@ import java.util.Objects;
  * When a <code>MAlertType</code> is chosen it also shows a small icon to the corresponding <code>MAlertType</code>.
  *
  * @author GregorGott
- * @version 0.1.1
- * @since 2022-05-20
+ * @version 0.1.2
+ * @since 2022-06-08
  */
 public class MAlert extends MDialogWindow {
     private final Stage stage;
@@ -40,11 +40,11 @@ public class MAlert extends MDialogWindow {
         this.mAlertType = mAlertType;
         this.setAlertImage();
 
-        mAlertStyle = MAlertStyle.LIGHT_ROUNDED;
-
         borderPane = new BorderPane();
 
         scene = new Scene(borderPane);
+
+        setAlertStyle(MAlertStyle.LIGHT_ROUNDED);
 
         stage = new Stage();
         stage.setWidth(350);
@@ -57,13 +57,13 @@ public class MAlert extends MDialogWindow {
      * Calls the first constructor and sets the Stage title.
      *
      * @param mAlertType the alert type to set the alert image.
-     * @param text       the title of the Stage.
+     * @param title      the title of the Stage.
      */
-    public MAlert(MAlertType mAlertType, String text) {
+    public MAlert(MAlertType mAlertType, String title) {
         this(mAlertType);
 
         // Set Stage title
-        setAlertTitle(text);
+        setAlertTitle(title);
     }
 
     /**
@@ -139,11 +139,17 @@ public class MAlert extends MDialogWindow {
         headlineLabel.setFont(new Font("Helvetica", 16));
 
         HBox topHBox = new HBox();
-        topHBox.getChildren().addAll(getAlertImageView(), headlineLabel);
         topHBox.setAlignment(Pos.CENTER_LEFT);
         topHBox.setSpacing(18);
         topHBox.setPadding(new Insets(5));
         topHBox.setId("header-box");
+
+        // Only add image to alert when it is not empty
+        if (getAlertImageView().getImage() != null) {
+            topHBox.getChildren().add(getAlertImageView());
+        }
+
+        topHBox.getChildren().add(headlineLabel);
 
         // Content text
         Label contentText = new Label(getContentText());
@@ -151,9 +157,12 @@ public class MAlert extends MDialogWindow {
 
         // Border pane
         borderPane.setPadding(new Insets(15));
-        borderPane.setTop(topHBox);
         borderPane.setCenter(contentText);
         borderPane.setBottom(getButtons(60, 10));
+
+        if (getHeadline() != null) {
+            borderPane.setTop(topHBox);
+        }
 
         stage.setTitle(getAlertTitle());
         stage.setScene(scene);
