@@ -14,8 +14,8 @@ import java.util.Objects;
  * Shows a Stage with an image in the center and buttons at the bottom.
  *
  * @author GregorGott
- * @version 0.0.1
- * @since 2022-05-20
+ * @version 0.1.0
+ * @since 2022-06-11
  */
 public class MImageAlert extends MDialogWindow {
     private final Stage stage;
@@ -24,7 +24,6 @@ public class MImageAlert extends MDialogWindow {
     private final ImageView imageView;
     private Window root;
     private Image image;
-    private MAlertStyle mAlertStyle;
 
     /**
      * Basic constructor which initializes variables and sets the Stage Scene.
@@ -32,18 +31,15 @@ public class MImageAlert extends MDialogWindow {
      * @since 0.0.1
      */
     public MImageAlert() {
-        super();
+        super(0, 0);
+
+        stage = super.getStage();
 
         borderPane = new BorderPane();
         imageView = new ImageView();
 
         scene = new Scene(borderPane);
-
-        setAlertStyle(MAlertStyle.LIGHT);
-
-        stage = new Stage();
-        stage.setResizable(false);
-        stage.setScene(scene);
+        scene.getStylesheets().add(getStylesheet(getMAlertStyle()));
     }
 
     /**
@@ -77,9 +73,8 @@ public class MImageAlert extends MDialogWindow {
      * @param mAlertStyle the <code>MAlertStyle</code>.
      * @since 0.0.1
      */
-    public void setAlertStyle(MAlertStyle mAlertStyle) {
-        this.mAlertStyle = mAlertStyle;
-        setStylesheet();
+    public void setMAlertStyle(MAlertStyle mAlertStyle) {
+        scene.getStylesheets().add(getStylesheet(mAlertStyle));
     }
 
     /**
@@ -118,42 +113,50 @@ public class MImageAlert extends MDialogWindow {
      *
      * @since 0.0.1
      */
-    private void setStylesheet() {
+    public String getStylesheet(MAlertStyle mAlertStyle) {
+        String css = null;
+
         switch (mAlertStyle) {
-            case LIGHT -> scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(
-                    "stylesheets/stylesheet-image-alert-light.css")).toExternalForm());
-            case DARK -> scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(
-                    "stylesheets/stylesheet-image-alert-dark.css")).toExternalForm());
+            case LIGHT_CLASSIC, LIGHT_ROUNDED -> css = Objects.requireNonNull(getClass().getResource(
+                    "stylesheets/stylesheet-image-alert-light.css")).toExternalForm();
+            case DARK_CLASSIC, DARK_ROUNDED -> css = Objects.requireNonNull(getClass().getResource(
+                    "stylesheets/stylesheet-image-alert-dark.css")).toExternalForm();
         }
+
+        return css;
     }
 
     /**
-     * Adds the border pane image to the center and adds button add the bottom.
-     *
-     * @return the Stage with all elements.
-     * @since 0.0.1
+     * @return the Stage.
+     * @since 0.1.0
      */
     public Stage getStage() {
+        setStage();
+        return stage;
+    }
+
+    /**
+     * Sets a Stage with the image in the center and the buttons at the bottom.
+     *
+     * @since 0.1.0
+     */
+    public void setStage() {
         borderPane.setCenter(imageView);
         borderPane.setBottom(getButtons((int) (imageView.getFitWidth() / getButtonArrayList().size()), 0));
 
         stage.setTitle(getAlertTitle());
         stage.initOwner(root);
         stage.initModality(Modality.WINDOW_MODAL);
-        return stage;
+        stage.setScene(scene);
     }
 
     /**
-     * Closes the Stage.
+     * Sets the Stage and shows it.
      *
-     * @since 0.0.1
+     * @since 0.1.0
      */
-    public void closeAlert() {
-        stage.close();
-    }
-
-    public enum MAlertStyle {
-        DARK,
-        LIGHT
+    public void show() {
+        setStage();
+        stage.show();
     }
 }

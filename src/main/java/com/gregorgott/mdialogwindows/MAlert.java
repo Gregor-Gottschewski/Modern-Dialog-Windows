@@ -19,38 +19,25 @@ import java.util.Objects;
  * When a <code>MAlertType</code> is chosen it also shows a small icon to the corresponding <code>MAlertType</code>.
  *
  * @author GregorGott
- * @version 0.1.2
- * @since 2022-06-08
+ * @version 0.2.0
+ * @since 2022-06-11
  */
 public class MAlert extends MDialogWindow {
     private final Stage stage;
-    private final Scene scene;
-    private final BorderPane borderPane;
     private final MAlertType mAlertType;
-    private MAlertStyle mAlertStyle;
 
     /**
-     * Initializes a Stage (dimensions: 350x190), which contains a border pane and sets the alert image.
+     * Initializes a Stage (dimensions: 350x190) and sets the alert image.
      *
      * @param mAlertType the alert type to set the alert image.
      */
     public MAlert(MAlertType mAlertType) {
-        super();
+        super(350, 190);
+
+        stage = super.getStage();
 
         this.mAlertType = mAlertType;
         this.setAlertImage();
-
-        borderPane = new BorderPane();
-
-        scene = new Scene(borderPane);
-
-        setAlertStyle(MAlertStyle.LIGHT_ROUNDED);
-
-        stage = new Stage();
-        stage.setWidth(350);
-        stage.setHeight(190);
-        stage.setResizable(false);
-        stage.setScene(scene);
     }
 
     /**
@@ -67,7 +54,7 @@ public class MAlert extends MDialogWindow {
     }
 
     /**
-     * Calls the second constructor and sets the parent window to set the <code>initOwner</code>.
+     * Calls the second constructor and sets the parent window to set the modality.
      *
      * @param mAlertType the alert type to set the alert image.
      * @param text       the title of the Stage.
@@ -82,19 +69,7 @@ public class MAlert extends MDialogWindow {
     }
 
     /**
-     * Set the alert style and switch the stylesheet.
-     *
-     * @param mAlertStyle The alert style.
-     * @since 0.0.1
-     */
-    public void setAlertStyle(MAlertStyle mAlertStyle) {
-        this.mAlertStyle = mAlertStyle;
-
-        setStylesheet();
-    }
-
-    /**
-     * Sets the alert image to the defaults if no custom image is given.
+     * If no custom image is given sets the alert image to the defaults.
      *
      * @since 0.0.1
      */
@@ -111,29 +86,11 @@ public class MAlert extends MDialogWindow {
     }
 
     /**
-     * Changes the stylesheet from the Scene by getting the <code>mAlertType</code>.
+     * Creates an HBox with the alert image and title and adds it to the border pane.
      *
-     * @since 0.0.1
+     * @since 0.2.0
      */
-    private void setStylesheet() {
-        switch (mAlertStyle) {
-            case LIGHT_CLASSIC -> scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(
-                    "stylesheets/stylesheet-light-classic.css")).toExternalForm());
-            case LIGHT_ROUNDED -> scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(
-                    "stylesheets/stylesheet-light-rounded.css")).toExternalForm());
-            case DARK_CLASSIC -> scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(
-                    "stylesheets/stylesheet-dark-classic.css")).toExternalForm());
-            case DARK_ROUNDED -> scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(
-                    "stylesheets/stylesheet-dark-rounded.css")).toExternalForm());
-        }
-    }
-
-    /**
-     * Creates an HBox with the alert image and title and adds it to the border pane. Then it shows the stage.
-     *
-     * @since 0.0.1
-     */
-    public Stage getStage() {
+    private void setStage() {
         // Header with alert image
         Label headlineLabel = new Label(getHeadline());
         headlineLabel.setFont(new Font("Helvetica", 16));
@@ -156,6 +113,7 @@ public class MAlert extends MDialogWindow {
         contentText.setWrapText(true);
 
         // Border pane
+        BorderPane borderPane = new BorderPane();
         borderPane.setPadding(new Insets(15));
         borderPane.setCenter(contentText);
         borderPane.setBottom(getButtons(60, 10));
@@ -164,26 +122,30 @@ public class MAlert extends MDialogWindow {
             borderPane.setTop(topHBox);
         }
 
+        Scene scene = new Scene(borderPane);
+        scene.getStylesheets().add(getStylesheet(getMAlertStyle()));
+
         stage.setTitle(getAlertTitle());
         stage.setScene(scene);
+    }
 
+    /**
+     * @return the Stage with all elements.
+     * @since 0.1.0
+     */
+    public Stage getStage() {
+        setStage();
         return stage;
     }
 
     /**
-     * Closes the Stage.
+     * Sets the Stage and shows it.
      *
-     * @since 0.0.1
+     * @since 0.2.0
      */
-    public void closeAlert() {
-        stage.close();
-    }
-
-    public enum MAlertStyle {
-        LIGHT_ROUNDED,
-        LIGHT_CLASSIC,
-        DARK_ROUNDED,
-        DARK_CLASSIC
+    public void show() {
+        setStage();
+        stage.show();
     }
 
     public enum MAlertType {

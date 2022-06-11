@@ -8,32 +8,72 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * MDialogWindow is the parent class for all Modern-Dialog-Windows.
  * It controls the button actions, header and content text.
  *
  * @author GregorGott
- * @version 0.0.2
- * @since 2022-05-20
+ * @version 0.1.0
+ * @since 2022-06-11
  */
 public class MDialogWindow {
+    private final Stage stage;
     private final ArrayList<Button> buttonArrayList;
     private ImageView alertImageView;
     private String alertTitle;
     private String headline;
     private String contentText;
+    private MAlertStyle mAlertStyle;
 
     /**
-     * Initializes the <code>buttonArrayList</code> which will contains all buttons.
+     * Initializes the <code>buttonArrayList</code> which will contains all buttons and the Stage.
      *
      * @since 0.0.1
      */
-    public MDialogWindow() {
+    public MDialogWindow(int width, int height) {
         // Initialize variables
         buttonArrayList = new ArrayList<>();
+
+        mAlertStyle = MAlertStyle.LIGHT_ROUNDED;
+
+        stage = new Stage();
+
+        // If the width or height is null, the size will be automatically set
+        if (height > 0) {
+            stage.setHeight(height);
+        }
+        if (width > 0) {
+            stage.setWidth(width);
+        }
+
+        stage.setResizable(false);
+    }
+
+    /**
+     * @return the Stage with all elements.
+     * @since 0.1.0
+     */
+    public Stage getStage() {
+        return stage;
+    }
+
+    public MAlertStyle getMAlertStyle() {
+        return mAlertStyle;
+    }
+
+    /**
+     * Set the alert style and switch the stylesheet.
+     *
+     * @param mAlertStyle The alert style.
+     * @since 0.0.1
+     */
+    public void setMAlertStyle(MAlertStyle mAlertStyle) {
+        this.mAlertStyle = mAlertStyle;
     }
 
     /**
@@ -150,5 +190,43 @@ public class MDialogWindow {
         }
 
         return bottomHBox;
+    }
+
+    /**
+     * Changes the stylesheet from the Scene by getting the <code>mAlertType</code>.
+     *
+     * @since 0.0.3
+     */
+    public String getStylesheet(MAlertStyle mAlertStyle) {
+        String css = null;
+
+        switch (mAlertStyle) {
+            case LIGHT_CLASSIC -> css = Objects.requireNonNull(getClass().getResource(
+                    "stylesheets/stylesheet-light-classic.css")).toExternalForm();
+            case LIGHT_ROUNDED -> css = Objects.requireNonNull(getClass().getResource(
+                    "stylesheets/stylesheet-light-rounded.css")).toExternalForm();
+            case DARK_CLASSIC -> css = Objects.requireNonNull(getClass().getResource(
+                    "stylesheets/stylesheet-dark-classic.css")).toExternalForm();
+            case DARK_ROUNDED -> css = Objects.requireNonNull(getClass().getResource(
+                    "stylesheets/stylesheet-dark-rounded.css")).toExternalForm();
+        }
+
+        return css;
+    }
+
+    /**
+     * Closes the Stage.
+     *
+     * @since 0.0.1
+     */
+    public void closeAlert() {
+        getStage().close();
+    }
+
+    public enum MAlertStyle {
+        LIGHT_CLASSIC,
+        LIGHT_ROUNDED,
+        DARK_CLASSIC,
+        DARK_ROUNDED
     }
 }

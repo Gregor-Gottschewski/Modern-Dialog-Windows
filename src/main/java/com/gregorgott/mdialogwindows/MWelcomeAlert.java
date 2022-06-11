@@ -14,23 +14,17 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
-import java.util.Objects;
-
 /**
  * MWelcomeAlert is an alert which can show e.g. the latest features of an app in widgets.
  * These widgets contain an image, header and content text.
  *
  * @author GregorGott
- * @version 0.0.3
- * @since 2022-06-08
+ * @version 0.1.0
+ * @since 2022-06-11
  */
 public class MWelcomeAlert extends MDialogWindow {
     private final Stage stage;
-    private final Scene scene;
-    private final BorderPane borderPane;
     private final VBox centerVBox;
-    private Window root;
-    private MAlertStyle mAlertStyle;
 
     /**
      * Calls the parent constructor, sets the <code>MAlertStyle</code> to defaults (<code>LIGHT_ROUNDED</code>),
@@ -39,28 +33,12 @@ public class MWelcomeAlert extends MDialogWindow {
      * @since 0.0.1
      */
     public MWelcomeAlert() {
-        super();
+        super(350, 400);
+
+        stage = super.getStage();
 
         // VBox contains all widgets
         centerVBox = new VBox();
-
-        // Scroll pane contains the v box
-        ScrollPane widgetScrollPane = new ScrollPane(centerVBox);
-        widgetScrollPane.setFitToWidth(true);
-        widgetScrollPane.setPadding(new Insets(5));
-
-        borderPane = new BorderPane();
-        borderPane.setCenter(widgetScrollPane);
-
-        scene = new Scene(borderPane);
-
-        setAlertStyle(MAlertStyle.LIGHT_ROUNDED);
-
-        stage = new Stage();
-        stage.setWidth(350);
-        stage.setHeight(400);
-        stage.setResizable(false);
-        stage.setScene(scene);
     }
 
     /**
@@ -85,37 +63,8 @@ public class MWelcomeAlert extends MDialogWindow {
     public MWelcomeAlert(String text, Window root) {
         this(text);
 
-        this.root = root;
-    }
-
-    /**
-     * Set the alert style and switch the stylesheet.
-     *
-     * @param mAlertStyle The alert style.
-     * @since 0.0.1
-     */
-    public void setAlertStyle(MAlertStyle mAlertStyle) {
-        this.mAlertStyle = mAlertStyle;
-
-        setStylesheet();
-    }
-
-    /**
-     * Changes the stylesheet from the Scene by getting the <code>mAlertType</code>.
-     *
-     * @since 0.0.1
-     */
-    private void setStylesheet() {
-        switch (mAlertStyle) {
-            case LIGHT_ROUNDED -> scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(
-                    "stylesheets/stylesheet-light-rounded.css")).toExternalForm());
-            case DARK_ROUNDED -> scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(
-                    "stylesheets/stylesheet-dark-rounded.css")).toExternalForm());
-            case LIGHT_CLASSIC -> scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(
-                    "stylesheets/stylesheet-light-classic.css")).toExternalForm());
-            case DARK_CLASSIC -> scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(
-                    "stylesheets/stylesheet-dark-classic.css")).toExternalForm());
-        }
+        stage.initOwner(root);
+        stage.initModality(Modality.WINDOW_MODAL);
     }
 
     /**
@@ -151,10 +100,9 @@ public class MWelcomeAlert extends MDialogWindow {
     /**
      * Adds the headline and content text for the Stage than adds a center VBox. The buttons a shown in the bottom.
      *
-     * @return a Stage with all elements
      * @since 0.0.1
      */
-    public Stage getStage() {
+    private void setStage() {
         Label headerLabel = new Label(getHeadline());
         headerLabel.setFont(new Font("Helvetica", 16));
         Label contentTextLabel = new Label(getContentText());
@@ -176,33 +124,43 @@ public class MWelcomeAlert extends MDialogWindow {
         centerVBox.setSpacing(15);
         centerVBox.setPadding(new Insets(10, 0, 0, 0));
 
+        // Scroll pane contains the v box
+        ScrollPane widgetScrollPane = new ScrollPane(centerVBox);
+        widgetScrollPane.setFitToWidth(true);
+        widgetScrollPane.setPadding(new Insets(5));
+
+        BorderPane borderPane = new BorderPane();
         borderPane.setPadding(new Insets(15));
         borderPane.setBottom(getButtons(60, 10));
+        borderPane.setCenter(widgetScrollPane);
 
         if (getHeadline() != null || getContentText() != null) {
             borderPane.setTop(topVBox);
         }
 
+        Scene scene = new Scene(borderPane);
+        scene.getStylesheets().add(getStylesheet(getMAlertStyle()));
+
         stage.setTitle(getAlertTitle());
         stage.setScene(scene);
-        stage.initOwner(root);
-        stage.initModality(Modality.WINDOW_MODAL);
+    }
+
+    /**
+     * @return the Stage with all elements.
+     * @since 0.1.0
+     */
+    public Stage getStage() {
+        setStage();
         return stage;
     }
 
     /**
-     * Closes the Stage.
+     * Sets the Stage and shows it.
      *
-     * @since 0.0.1
+     * @since 0.1.0
      */
-    public void closeAlert() {
-        stage.close();
-    }
-
-    public enum MAlertStyle {
-        LIGHT_ROUNDED,
-        LIGHT_CLASSIC,
-        DARK_ROUNDED,
-        DARK_CLASSIC
+    public void show() {
+        setStage();
+        stage.show();
     }
 }
