@@ -44,7 +44,25 @@
     -fx-padding: 0.0 0.15em;
 }
 
-/* Button global */
+/* Accordion */
+.accordion .titled-pane {
+    -fx-text-fill: white;
+}
+
+.accordion .titled-pane .title {
+    -fx-background-color: #3b3b3b;
+}
+
+.titled-pane .title .arrow-button .arrow {
+    -fx-background-color: white;
+}
+
+.accordion .titled-pane .label {
+    -fx-background-color: #464646;
+    -fx-border-width: 0;
+}
+
+/* Button */
 .button {
     -fx-background-color: #3b3b3b;
     -fx-border-color: #464646;

@@ -44,6 +44,24 @@
     -fx-padding: 0.0 0.15em;
 }
 
+/* Accordion */
+.accordion .titled-pane {
+    -fx-text-fill: black;
+}
+
+.accordion .titled-pane .title {
+    -fx-background-color: #d0d0d0;
+}
+
+.titled-pane .title .arrow-button .arrow {
+    -fx-background-color: black;
+}
+
+.accordion .titled-pane .label {
+    -fx-background-color: #ababab;
+    -fx-border-width: 0;
+}
+
 /* Button global */
 .button {
     -fx-background-color: #d0d0d0;

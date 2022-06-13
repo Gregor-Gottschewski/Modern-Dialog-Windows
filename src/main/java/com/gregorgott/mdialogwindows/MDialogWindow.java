@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 /**
- * MDialogWindow is the parent class for all Modern-Dialog-Windows.
- * It controls the button actions, header and content text.
+ * MDialogWindow is the parent class of all alerts.
+ * This class creates a Stage with a title and the MAlertStyle. Also, the header and content text gets set by this class.
  *
  * @author GregorGott
  * @version 0.1.0
@@ -31,8 +31,11 @@ public class MDialogWindow {
     private MAlertStyle mAlertStyle;
 
     /**
-     * Initializes the <code>buttonArrayList</code> which will contains all buttons and the Stage.
+     * Initializes the <code>buttonArrayList</code> which will contains all buttons and a Stage with given dimensions.
+     * If the width or height is null, it will be automatically calculated.
      *
+     * @param height the height of the Stage (null oder bigger).
+     * @param width  the width of the Stage (null or bigger).
      * @since 0.0.1
      */
     public MDialogWindow(int width, int height) {
@@ -62,14 +65,18 @@ public class MDialogWindow {
         return stage;
     }
 
+    /**
+     * @return the MAlertStyle to set the correct stylesheet.
+     * @since 0.1.0
+     */
     public MAlertStyle getMAlertStyle() {
         return mAlertStyle;
     }
 
     /**
-     * Set the alert style and switch the stylesheet.
+     * Sets the MAlertStyle.
      *
-     * @param mAlertStyle The alert style.
+     * @param mAlertStyle the MAlertStyle.
      * @since 0.0.1
      */
     public void setMAlertStyle(MAlertStyle mAlertStyle) {
@@ -77,7 +84,7 @@ public class MDialogWindow {
     }
 
     /**
-     * @return The title of the alert.
+     * @return the title of the alert.
      * @since 0.0.1
      */
     public String getAlertTitle() {
@@ -85,7 +92,7 @@ public class MDialogWindow {
     }
 
     /**
-     * Sets the title of the Stage and sets the <code>alertTitle</code>.
+     * Sets the <code>alertTitle</code>.
      *
      * @param alertTitle the title of the Stage.
      * @since 0.0.1
@@ -103,7 +110,7 @@ public class MDialogWindow {
     }
 
     /**
-     * Sets the alert image shown in the Scene on the top.
+     * Sets the alert image, which is shown on the top of the Scene width the dimensions 50x50.
      *
      * @param image the image to show on the top.
      * @since 0.0.1
@@ -123,7 +130,7 @@ public class MDialogWindow {
     }
 
     /**
-     * Sets the headline by creating a label with the text size of 16 px.
+     * Sets the headline text.
      *
      * @param headline the headline.
      * @since 0.0.1
@@ -141,7 +148,7 @@ public class MDialogWindow {
     }
 
     /**
-     * Sets the content text of the alert.
+     * Sets the <code>contentText</code> of the alert.
      *
      * @param contentText the content text of the alert.
      * @since 0.0.1
@@ -151,7 +158,7 @@ public class MDialogWindow {
     }
 
     /**
-     * @return All buttons in the <code>buttonArrayList</code> array list.
+     * @return all buttons in the <code>buttonArrayList</code> array list.
      * @since 0.0.1
      */
     public ArrayList<Button> getButtonArrayList() {
@@ -159,7 +166,8 @@ public class MDialogWindow {
     }
 
     /**
-     * Adds a button to the <code>buttonArrayList</code> with a text and an <code>ActionEvent</code>.
+     * Adds a button to the <code>buttonArrayList</code> with a text, an <code>ActionEvent</code>, and a boolean
+     * which sets the button default or not.
      *
      * @param text          the button text.
      * @param onClickEvent  called action event when the button is pushed.
@@ -175,8 +183,9 @@ public class MDialogWindow {
     }
 
     /**
-     * Creates a HBox with right alignment and add every button in <code>buttonArrayList</code>
+     * Creates a HBox with every button in <code>buttonArrayList</code>.
      *
+     * @return an HBox with all buttons.
      * @since 0.0.1
      */
     public Node getButtons(int width, int spacing) {
@@ -193,8 +202,9 @@ public class MDialogWindow {
     }
 
     /**
-     * Changes the stylesheet from the Scene by getting the <code>mAlertType</code>.
+     * Changes the stylesheet from the Scene by returning the belonging MAlertTypes stylesheet path.
      *
+     * @param mAlertStyle the MAlertType.
      * @since 0.0.3
      */
     public String getStylesheet(MAlertStyle mAlertStyle) {

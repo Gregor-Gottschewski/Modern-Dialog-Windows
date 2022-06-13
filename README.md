@@ -2,7 +2,7 @@
 
 ![Language: Java](https://img.shields.io/badge/Language-Java-informational)
 ![Framework: JavaFX](https://img.shields.io/badge/Framework-JavaFX-informational)
-![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-red)
+![Version: 0.1.1](https://img.shields.io/badge/Version-0.1.1-red)
 ![Stable Release: 20th June 2022](https://img.shields.io/badge/Stable_Release-20th_June_2022-yellow)
 
 > Modern-Dialog-Windows is a JavaFX library with modern-looking alerts. They are a user-friendly alternative to the
@@ -25,13 +25,15 @@ And to do that, Modern-Dialog-Windows returns a Stage on which you can change ev
 
 ## Alerts overview.
 
-| Name                       | Version | Released |
-|----------------------------|---------|----------|
-| MDialogWindow (Superclass) | 0.1.0   | Yes      |
-| MAlert                     | 0.2.0   | Yes      |
-| MTextInputAlert            | 0.1.0   | Yes      |
-| MImageAlert                | 0.1.0   | Yes      |
-| MWelcomeAlert              | 0.1.0   | Yes      |
+| Hierarchy             | Name                   | Version |
+|-----------------------|------------------------|---------|
+| _1._ **Superclass**   | MDialogWindow          | 0.1.0   |
+| _2._ MDialogWindow    | MAlert                 | 0.2.0   |
+| _2._ MDialogWindow    | MTextInputAlert        | 0.1.0   |
+| _2._ MDialogWindow    | MImageAlert            | 0.1.0   |
+| _2._ MDialogWindow    | MScrollPaneAlert       | 0.0.1   |
+| _3._ MScrollPaneAlert | MWelcomeAlert          | 0.2.0   |
+| _3._ MScrollPaneAlert | MMultiInformationAlert | 0.0.1   |
 
 ## MAlert Sneak Peek.
 
@@ -56,6 +58,6 @@ Code:
 
 ## You want to see Modern-Dialog-Windows in Action?
 
-Word Guesser uses Modern-Dialog-Windows (Version: 0.0.2): [GitHub Word Guesser](https://github.com/GregorGott/Word-Guesser)
+Word Guesser uses Modern-Dialog-Windows (Version: 0.0.2): [Word Guesser on GitHub](https://github.com/GregorGott/Word-Guesser)
 
-Math Trainer uses Modern-Dialog-Windows (Version: 0.0.5): [GitHub Math Trainer](https://github.com/GregorGott/Math-Trainer)
+Math Trainer uses Modern-Dialog-Windows (Version: 0.0.5): [Math Trainer on GitHub](https://github.com/GregorGott/Math-Trainer)
