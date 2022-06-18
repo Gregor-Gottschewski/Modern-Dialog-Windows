@@ -1,5 +1,6 @@
 package com.gregorgott.mdialogwindows;
 
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Label;
@@ -63,6 +64,7 @@ public class MMultiInformationAlert extends MScrollPaneAlert {
     public void addWidget(String header, String contentText) {
         Label contentTextLabel = new Label(contentText);
         contentTextLabel.setWrapText(true);
+        contentTextLabel.setPadding(new Insets(10));
 
         TitledPane titledPane = new TitledPane(header, contentTextLabel);
 

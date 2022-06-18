@@ -17,8 +17,8 @@ import javafx.stage.Window;
  * It can return the entered text.
  *
  * @author GregorGott
- * @version 0.1.0
- * @since 2022-06-08
+ * @version 0.1.1
+ * @since 2022-06-18
  */
 public class MTextFieldAlert extends MDialogWindow {
     private final Stage stage;
@@ -94,10 +94,19 @@ public class MTextFieldAlert extends MDialogWindow {
     private void setStage() {
         Label headerLabel = new Label(getHeadline());
         headerLabel.setFont(new Font("Helvetica", 16));
-        headerLabel.setAlignment(Pos.CENTER);
-        headerLabel.setPrefWidth(Integer.MAX_VALUE);
-        headerLabel.setPadding(new Insets(10));
-        headerLabel.setId("header-box");
+
+        // HBox with alert title and alert image
+        HBox topHBox = new HBox();
+        topHBox.setPadding(new Insets(10));
+        topHBox.setSpacing(18);
+        topHBox.setAlignment(Pos.CENTER_LEFT);
+        topHBox.setId("header-box");
+
+        // Add alert image if given
+        if (getAlertImageView() != null) {
+            topHBox.getChildren().add(getAlertImageView());
+        }
+        topHBox.getChildren().add(headerLabel);
 
         Label contentText = new Label(getContentText());
         contentText.setWrapText(true);
@@ -116,8 +125,8 @@ public class MTextFieldAlert extends MDialogWindow {
         borderPane.setCenter(textFieldHBox);
         borderPane.setBottom(getButtons(60, 10));
 
-        if (getHeadline() != null) {
-            borderPane.setTop(headerLabel);
+        if (getHeadline() != null || getAlertImageView() != null) {
+            borderPane.setTop(topHBox);
         }
 
         Scene scene = new Scene(borderPane);
