@@ -2,8 +2,7 @@
 
 ![Language: Java](https://img.shields.io/badge/Language-Java-informational)
 ![Framework: JavaFX](https://img.shields.io/badge/Framework-JavaFX-informational)
-![Version: 0.1.2](https://img.shields.io/badge/Version-0.1.2-red)
-![Stable Release: 20th June 2022](https://img.shields.io/badge/Stable_Release-20th_June_2022-yellow)
+![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-red)
 
 > Modern-Dialog-Windows is a JavaFX library with modern-looking alerts. They are a user-friendly alternative to the
 > normal JavaFX alerts.
@@ -34,6 +33,11 @@ And to do that, Modern-Dialog-Windows returns a Stage on which you can change ev
 | _2._ MDialogWindow    | MScrollPaneAlert       | 0.0.2   |
 | _3._ MScrollPaneAlert | MWelcomeAlert          | 0.2.0   |
 | _3._ MScrollPaneAlert | MMultiInformationAlert | 0.0.1   |
+
+## Download
+The download is finally here. You can find a documentation here: [Documentation](https://github.com/GregorGott/Modern-Dialog-Windows/wiki)
+
+**Download version 1.0.0: [Download here]()**
 
 ## MAlert Sneak Peek.
 
