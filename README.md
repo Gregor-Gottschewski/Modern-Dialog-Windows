@@ -37,7 +37,7 @@ And to do that, Modern-Dialog-Windows returns a Stage on which you can change ev
 ## Download
 The download is finally here. You can find a documentation here: [Documentation](https://github.com/GregorGott/Modern-Dialog-Windows/wiki)
 
-**Download version 1.0.0: [Download here]()**
+**Download version 1.0.0: [Download here](https://github.com/GregorGott/Modern-Dialog-Windows/releases/download/v1.0.0/MDialogWindows-1.0.0.jar)**
 
 ## MAlert Sneak Peek.
 
