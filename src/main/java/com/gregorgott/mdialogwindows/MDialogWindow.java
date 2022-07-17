@@ -2,12 +2,17 @@ package com.gregorgott.mdialogwindows;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -18,14 +23,14 @@ import java.util.Objects;
  * This class creates a Stage with a title and the MAlertStyle. Also, the header and content text gets set by this class.
  *
  * @author GregorGott
- * @version 0.1.0
- * @since 2022-06-11
+ * @version 1.0.0
+ * @since 2022-07-17
  */
 public class MDialogWindow {
     private final Stage stage;
+    private final BorderPane borderPane;
     private final ArrayList<Button> buttonArrayList;
     private ImageView alertImageView;
-    private String alertTitle;
     private String headline;
     private String contentText;
     private MAlertStyle mAlertStyle;
@@ -55,6 +60,9 @@ public class MDialogWindow {
         }
 
         stage.setResizable(false);
+
+        borderPane = new BorderPane();
+        borderPane.setPadding(new Insets(15));
     }
 
     /**
@@ -84,21 +92,13 @@ public class MDialogWindow {
     }
 
     /**
-     * @return the title of the alert.
-     * @since 0.0.1
-     */
-    public String getAlertTitle() {
-        return alertTitle;
-    }
-
-    /**
      * Sets the <code>alertTitle</code>.
      *
      * @param alertTitle the title of the Stage.
      * @since 0.0.1
      */
     public void setAlertTitle(String alertTitle) {
-        this.alertTitle = alertTitle;
+        stage.setTitle(alertTitle);
     }
 
     /**
@@ -180,6 +180,47 @@ public class MDialogWindow {
         button.setDefaultButton(defaultButton);
 
         buttonArrayList.add(button);
+    }
+
+    protected Node getHeader() {
+        // return the top Node only when headline or content text is not null
+        if (getHeadline() != null || getContentText() != null) {
+            Label headlineLabel = new Label(getHeadline());
+            headlineLabel.setWrapText(true);
+            headlineLabel.setFont(new Font("Helvetica", 16));
+            Label contentLabel = new Label(getContentText());
+            contentLabel.setWrapText(true);
+            contentLabel.setFont(new Font("Helvetica", 13));
+
+            VBox headerVBox = new VBox();
+            headerVBox.setSpacing(5);
+
+            if (getHeadline() != null) {
+                headerVBox.getChildren().add(headlineLabel);
+            }
+
+            if (getContentText() != null) {
+                headerVBox.getChildren().add(contentLabel);
+            }
+
+            HBox hBox = new HBox();
+            hBox.setSpacing(18);
+            hBox.setPadding(new Insets(5));
+            hBox.setId("header-box");
+
+            if (getAlertImageView() != null) {
+                hBox.getChildren().add(getAlertImageView());
+            }
+            hBox.getChildren().add(headerVBox);
+
+            return hBox;
+        } else {
+            return null;
+        }
+    }
+
+    protected BorderPane getBorderPane() {
+        return borderPane;
     }
 
     /**

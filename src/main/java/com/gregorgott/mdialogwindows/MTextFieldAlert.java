@@ -1,15 +1,12 @@
 package com.gregorgott.mdialogwindows;
 
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.text.Font;
+import javafx.scene.layout.Priority;
 import javafx.stage.Modality;
-import javafx.stage.Stage;
 import javafx.stage.Window;
 
 /**
@@ -17,52 +14,56 @@ import javafx.stage.Window;
  * It can return the entered text.
  *
  * @author GregorGott
- * @version 0.1.1
- * @since 2022-06-18
+ * @version 1.0.0
+ * @since 2022-07-17
  */
 public class MTextFieldAlert extends MDialogWindow {
-    private final Stage stage;
     private final TextField textField;
+    private String infoText;
+
+    public MTextFieldAlert() {
+        this(null, null);
+    }
+
+    public MTextFieldAlert(String title) {
+        this(title, null);
+    }
 
     /**
-     * Initializes a Stage (dimensions: 350x190), which contains a border pane, sets the alert image and
-     * initializes a text field.
+     * Calls the superclass with the dimensions 350x190, initializes a <code>TextField</code>, sets the
+     * <code>Stage</code> parent window and the title.
      *
+     * @param title the title of the Stage.
+     * @param root  the parent window.
      * @since 0.0.1
      */
-    public MTextFieldAlert() {
+    public MTextFieldAlert(String title, Window root) {
         super(350, 190);
 
         textField = new TextField();
         textField.setMinWidth(150);
 
-        stage = super.getStage();
-    }
-
-    /**
-     * Calls the first constructor and sets the Stage title.
-     *
-     * @param title the title of the Stage.
-     * @since 0.0.1
-     */
-    public MTextFieldAlert(String title) {
-        this();
+        getStage().initOwner(root);
+        getStage().initModality(Modality.WINDOW_MODAL);
 
         setAlertTitle(title);
     }
 
     /**
-     * Calls the second constructor and sets the parent window.
-     *
-     * @param text the title of the Stage.
-     * @param root the parent window.
-     * @since 0.0.1
+     * @return the info text as string.
+     * @since 1.0.0
      */
-    public MTextFieldAlert(String text, Window root) {
-        this(text);
+    public String getInfoText() {
+        return infoText;
+    }
 
-        stage.initOwner(root);
-        stage.initModality(Modality.WINDOW_MODAL);
+    /**
+     * Sets the info text, which is shown beside the <code>TextField</code>.
+     * @param infoText the info text.
+     * @since 1.0.0
+     */
+    public void setInfoText(String infoText) {
+        this.infoText = infoText;
     }
 
     /**
@@ -81,59 +82,34 @@ public class MTextFieldAlert extends MDialogWindow {
         return textField.getText();
     }
 
-    public Stage getStage() {
-        setStage();
-        return stage;
-    }
-
     /**
-     * Creates an HBox with the alert image and title and adds it to the border pane. Then it shows the stage.
+     * Gets the superclass <code>BorderPane</code> and sets the header as top and an HBox with the info text (if given)
+     * and an <code>TextField</code> as center.
      *
      * @since 0.0.1
      */
     private void setStage() {
-        Label headerLabel = new Label(getHeadline());
-        headerLabel.setFont(new Font("Helvetica", 16));
+        Label infoTextLabel = new Label(infoText);
+        infoTextLabel.setWrapText(true);
 
-        // HBox with alert title and alert image
-        HBox topHBox = new HBox();
-        topHBox.setPadding(new Insets(10));
-        topHBox.setSpacing(18);
-        topHBox.setAlignment(Pos.CENTER_LEFT);
-        topHBox.setId("header-box");
+        HBox centerHBox = new HBox();
+        centerHBox.setSpacing(5);
+        centerHBox.setAlignment(Pos.CENTER);
 
-        // Add alert image if given
-        if (getAlertImageView() != null) {
-            topHBox.getChildren().add(getAlertImageView());
+        if (infoText != null) {
+            centerHBox.getChildren().add(infoTextLabel);
         }
-        topHBox.getChildren().add(headerLabel);
+        centerHBox.getChildren().add(textField);
+        HBox.setHgrow(textField, Priority.ALWAYS);
 
-        Label contentText = new Label(getContentText());
-        contentText.setWrapText(true);
+        getBorderPane().setTop(getHeader());
+        getBorderPane().setCenter(centerHBox);
+        getBorderPane().setBottom(getButtons(60, 10));
 
-        HBox textFieldHBox = new HBox();
-        textFieldHBox.setSpacing(5);
-        textFieldHBox.setAlignment(Pos.CENTER);
-
-        if (getContentText() != null) {
-            textFieldHBox.getChildren().add(contentText);
-        }
-        textFieldHBox.getChildren().add(textField);
-
-        BorderPane borderPane = new BorderPane();
-        borderPane.setPadding(new Insets(15));
-        borderPane.setCenter(textFieldHBox);
-        borderPane.setBottom(getButtons(60, 10));
-
-        if (getHeadline() != null || getAlertImageView() != null) {
-            borderPane.setTop(topHBox);
-        }
-
-        Scene scene = new Scene(borderPane);
+        Scene scene = new Scene(getBorderPane());
         scene.getStylesheets().add(getStylesheet(getMAlertStyle()));
 
-        stage.setTitle(getAlertTitle());
-        stage.setScene(scene);
+        getStage().setScene(scene);
     }
 
     /**
@@ -143,6 +119,6 @@ public class MTextFieldAlert extends MDialogWindow {
      */
     public void show() {
         setStage();
-        stage.show();
+        getStage().show();
     }
 }

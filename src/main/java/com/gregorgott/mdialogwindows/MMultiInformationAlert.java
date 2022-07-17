@@ -4,7 +4,6 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TitledPane;
 import javafx.stage.Window;
 
@@ -13,7 +12,7 @@ import javafx.stage.Window;
  * the center. These titled panes can contain a text or a node.
  *
  * @author GregorGott
- * @version 0.0.1
+ * @version 1.0.0
  * @since 2022-06-13
  */
 public class MMultiInformationAlert extends MScrollPaneAlert {
@@ -50,8 +49,7 @@ public class MMultiInformationAlert extends MScrollPaneAlert {
 
         accordion = new Accordion();
 
-        ScrollPane scrollPane = getScrollPane();
-        scrollPane.setContent(accordion);
+        getScrollPane().setContent(accordion);
     }
 
     /**

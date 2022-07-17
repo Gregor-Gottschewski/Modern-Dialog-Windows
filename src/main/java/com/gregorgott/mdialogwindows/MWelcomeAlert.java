@@ -1,12 +1,10 @@
 package com.gregorgott.mdialogwindows;
 
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Window;
@@ -16,76 +14,69 @@ import javafx.stage.Window;
  * These widgets contain an image, header and a short content text.
  *
  * @author GregorGott
- * @version 0.2.0
- * @since 2022-06-13
+ * @version 1.0.0
+ * @since 2022-07-17
  */
 public class MWelcomeAlert extends MScrollPaneAlert {
     private final VBox centerVBox;
 
-    /**
-     * If no title and root window is given, this constructor is called. It calls the third constructor with null
-     * values.
-     *
-     * @since 0.0.1
-     */
     public MWelcomeAlert() {
         this(null, null);
     }
 
-    /**
-     * Calls the third constructor and sets the Stage title.
-     *
-     * @param title the title of the Stage.
-     * @since 0.0.1
-     */
     public MWelcomeAlert(String title) {
         this(title, null);
     }
 
     /**
-     * This constructor is called by any other secondary constructors and calls the superclass constructor with
-     * title and parent window.
+     * Calls the superclass with the title and root window, initializes a <code>VBox</code> which contains all widgets
+     * and sets this <code>VBox</code> as the content of the <code>ScrollPane</code>.
      *
-     * @param text the title of the Stage.
-     * @param root the parent window.
+     * @param title the title of the Stage.
+     * @param root  the parent window.
      * @since 0.0.1
      */
-    public MWelcomeAlert(String text, Window root) {
-        super(text, root);
+    public MWelcomeAlert(String title, Window root) {
+        super(title, root);
 
         // VBox contains all widgets
         centerVBox = new VBox();
-        ScrollPane scrollPane = getScrollPane();
-        scrollPane.setContent(centerVBox);
+        centerVBox.setSpacing(15);
+        getScrollPane().setContent(centerVBox);
     }
 
     /**
-     * A widget contains an image, headline and a small info text. New features can be described here.
+     * A widget contains an image, headline and a small info text.
      *
      * @param image    an 60x60 image.
-     * @param headline a headline of the widget.
+     * @param headline a headline of the widget (with text wrap).
      * @param infoText a small info text (with text wrap).
      * @since 0.0.1
      */
     public void addWidget(Image image, String headline, String infoText) {
         Label headlineLabel = new Label(headline);
+        headlineLabel.setWrapText(true);
         headlineLabel.setFont(new Font("Helvetica", 15));
 
         Label infoLabel = new Label(infoText);
         infoLabel.setWrapText(true);
 
-        VBox vBox = new VBox(headlineLabel, infoLabel);
-        vBox.setAlignment(Pos.CENTER_LEFT);
-        vBox.setPadding(new Insets(5));
+        VBox textVBox = new VBox(headlineLabel, infoLabel);
+        textVBox.setAlignment(Pos.CENTER_LEFT);
+        textVBox.setSpacing(5);
 
         ImageView imageView = new ImageView(image);
         imageView.setFitHeight(60);
         imageView.setFitWidth(60);
 
-        BorderPane widgetPane = new BorderPane();
-        widgetPane.setCenter(vBox);
-        widgetPane.setLeft(imageView);
+        HBox widgetHBox = new HBox();
+        widgetHBox.setSpacing(10);
+        widgetHBox.setAlignment(Pos.CENTER_LEFT);
+        if (image != null) {
+            widgetHBox.getChildren().add(imageView);
+        }
+        widgetHBox.getChildren().add(textVBox);
 
-        centerVBox.getChildren().add(widgetPane);
+        centerVBox.getChildren().add(widgetHBox);
     }
 }

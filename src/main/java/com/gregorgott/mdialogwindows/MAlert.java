@@ -1,71 +1,50 @@
 package com.gregorgott.mdialogwindows;
 
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.text.Font;
 import javafx.stage.Modality;
-import javafx.stage.Stage;
 import javafx.stage.Window;
 
 import java.util.Objects;
 
 /**
- * The MAlert is a Stage with customized buttons, title and content text.
- * When a <code>MAlertType</code> is chosen it also shows a small icon to the corresponding <code>MAlertType</code>.
+ * The MAlert is a Stage with buttons, title, content text and info text.
+ * When a <code>MAlertType</code> is given it also shows an icon to the corresponding <code>MAlertType</code>
+ * on the top.
  *
  * @author GregorGott
- * @version 0.2.0
- * @since 2022-06-11
+ * @version 1.0.0
+ * @since 2022-07-17
  */
 public class MAlert extends MDialogWindow {
-    private final Stage stage;
     private final MAlertType mAlertType;
+    private String infoText;
 
-    /**
-     * Initializes a Stage (dimensions: 350x190) and sets the alert image.
-     *
-     * @param mAlertType the alert type to set the alert image.
-     */
     public MAlert(MAlertType mAlertType) {
-        super(350, 190);
+        this(mAlertType, null, null);
+    }
 
-        stage = super.getStage();
-
-        this.mAlertType = mAlertType;
-        this.setAlertImage();
+    public MAlert(MAlertType mAlertType, String title) {
+        this(mAlertType, title, null);
     }
 
     /**
-     * Calls the first constructor and sets the Stage title.
+     * Initializes a <code>Stage</code> (dimensions: 350x190), sets the alert image, title and root window.
      *
      * @param mAlertType the alert type to set the alert image.
      * @param title      the title of the Stage.
-     */
-    public MAlert(MAlertType mAlertType, String title) {
-        this(mAlertType);
-
-        // Set Stage title
-        setAlertTitle(title);
-    }
-
-    /**
-     * Calls the second constructor and sets the parent window to set the modality.
-     *
-     * @param mAlertType the alert type to set the alert image.
-     * @param text       the title of the Stage.
      * @param root       the parent window.
      */
-    public MAlert(MAlertType mAlertType, String text, Window root) {
-        this(mAlertType, text);
+    public MAlert(MAlertType mAlertType, String title, Window root) {
+        super(350, 190);
 
-        // Set parent window
-        stage.initOwner(root);
-        stage.initModality(Modality.WINDOW_MODAL);
+        this.mAlertType = mAlertType;
+        this.setMAlertImage();
+
+        setAlertTitle(title);
+        getStage().initOwner(root);
+        getStage().initModality(Modality.WINDOW_MODAL);
     }
 
     /**
@@ -73,69 +52,54 @@ public class MAlert extends MDialogWindow {
      *
      * @since 0.0.1
      */
-    private void setAlertImage() {
+    private void setMAlertImage() {
         switch (mAlertType) {
-            case INFORMATION -> super.setAlertImage(new Image(Objects.requireNonNull(
+            case INFORMATION -> setAlertImage(new Image(Objects.requireNonNull(
                     getClass().getResourceAsStream("images/information-image.png"))));
-            case ERROR -> super.setAlertImage(new Image(Objects.requireNonNull(
+            case ERROR -> setAlertImage(new Image(Objects.requireNonNull(
                     getClass().getResourceAsStream("images/warning-image.png"))));
-            case CONFIRMATION -> super.setAlertImage(new Image(Objects.requireNonNull(
+            case CONFIRMATION -> setAlertImage(new Image(Objects.requireNonNull(
                     getClass().getResourceAsStream("images/question-mark-image.png"))));
-            case NONE -> super.setAlertImage(null);
+            case NONE -> setAlertImage(null);
         }
     }
 
     /**
-     * Creates an HBox with the alert image and title and adds it to the border pane.
+     * @return the info text.
+     * @since 1.0.0
+     */
+    public String getInfoText() {
+        return infoText;
+    }
+
+    /**
+     * Sets the info text which is shown in the centre of the alert.
+     *
+     * @param infoText info text as string.
+     * @since 1.0.0
+     */
+    public void setInfoText(String infoText) {
+        this.infoText = infoText;
+    }
+
+    /**
+     * Sets the <code>infoText</code> as the centre of the <code>BorderPane</code> and sets top header and bottom
+     * buttons.
      *
      * @since 0.2.0
      */
     private void setStage() {
-        // Header with alert image
-        Label headlineLabel = new Label(getHeadline());
-        headlineLabel.setFont(new Font("Helvetica", 16));
+        Label infoTextLabel = new Label(infoText);
+        infoTextLabel.setWrapText(true);
 
-        HBox topHBox = new HBox();
-        topHBox.setAlignment(Pos.CENTER_LEFT);
-        topHBox.setSpacing(18);
-        topHBox.setPadding(new Insets(5));
-        topHBox.setId("header-box");
+        getBorderPane().setTop(getHeader());
+        getBorderPane().setCenter(infoTextLabel);
+        getBorderPane().setBottom(getButtons(60, 10));
 
-        // Only add image to alert when it is not empty
-        if (getAlertImageView().getImage() != null) {
-            topHBox.getChildren().add(getAlertImageView());
-        }
-
-        topHBox.getChildren().add(headlineLabel);
-
-        // Content text
-        Label contentText = new Label(getContentText());
-        contentText.setWrapText(true);
-
-        // Border pane
-        BorderPane borderPane = new BorderPane();
-        borderPane.setPadding(new Insets(15));
-        borderPane.setCenter(contentText);
-        borderPane.setBottom(getButtons(60, 10));
-
-        if (getHeadline() != null) {
-            borderPane.setTop(topHBox);
-        }
-
-        Scene scene = new Scene(borderPane);
+        Scene scene = new Scene(getBorderPane());
         scene.getStylesheets().add(getStylesheet(getMAlertStyle()));
 
-        stage.setTitle(getAlertTitle());
-        stage.setScene(scene);
-    }
-
-    /**
-     * @return the Stage with all elements.
-     * @since 0.1.0
-     */
-    public Stage getStage() {
-        setStage();
-        return stage;
+        getStage().setScene(scene);
     }
 
     /**
@@ -145,7 +109,7 @@ public class MAlert extends MDialogWindow {
      */
     public void show() {
         setStage();
-        stage.show();
+        getStage().show();
     }
 
     public enum MAlertType {

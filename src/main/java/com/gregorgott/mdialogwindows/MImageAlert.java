@@ -5,66 +5,52 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
-import javafx.stage.Stage;
 import javafx.stage.Window;
 
 import java.util.Objects;
 
 /**
- * Shows a Stage with an image in the center and buttons at the bottom.
+ * Shows a <code>Stage</code> with an image in the centre and buttons at the bottom.
  *
  * @author GregorGott
- * @version 0.1.0
- * @since 2022-06-11
+ * @version 1.0.0
+ * @since 2022-07-17
  */
 public class MImageAlert extends MDialogWindow {
-    private final Stage stage;
     private final Scene scene;
     private final BorderPane borderPane;
     private final ImageView imageView;
-    private Window root;
     private Image image;
 
-    /**
-     * Basic constructor which initializes variables and sets the Stage Scene.
-     *
-     * @since 0.0.1
-     */
-    public MImageAlert() {
-        super(0, 0);
+    public MImageAlert(Image image) {
+        this(image, null, null);
+    }
 
-        stage = super.getStage();
-
-        borderPane = new BorderPane();
-        imageView = new ImageView();
-
-        scene = new Scene(borderPane);
-        scene.getStylesheets().add(getStylesheet(getMAlertStyle()));
+    public MImageAlert(Image image, String title) {
+        this(image, title, null);
     }
 
     /**
-     * Calls the first constructor and sets the alert title.
+     * Calls the superclass constructor and initializes a <code>BorderPane</code> which overrides the
+     * <code>MDialogWindow</code>s <code>BorderPane</code>. And sets the alert image, title and <code>Stage</code> root.
      *
-     * @param title title of the Stage.
-     * @since 0.0.1
-     */
-    public MImageAlert(String title) {
-        this();
-
-        setAlertTitle(title);
-    }
-
-    /**
-     * Calls the second constructor and sets the parent window.
-     *
+     * @param image centre image.
      * @param title title of the alert.
      * @param root  root window of the alert.
      * @since 0.0.1
      */
-    public MImageAlert(String title, Window root) {
-        this(title);
+    public MImageAlert(Image image, String title, Window root) {
+        super(0, 0);
 
-        this.root = root;
+        borderPane = new BorderPane();
+        scene = new Scene(borderPane);
+        imageView = new ImageView();
+
+        setAlertImage(image);
+        setAlertTitle(title);
+
+        getStage().initOwner(root);
+        getStage().initModality(Modality.WINDOW_MODAL);
     }
 
     /**
@@ -81,7 +67,7 @@ public class MImageAlert extends MDialogWindow {
      * @return the image shown in the alert.
      * @since 0.0.1
      */
-    public Image getImage() {
+    public Image getAlertImage() {
         return image;
     }
 
@@ -91,7 +77,7 @@ public class MImageAlert extends MDialogWindow {
      * @param image image in the alert.
      * @since 0.0.1
      */
-    public void setImage(Image image) {
+    public void setAlertImage(Image image) {
         this.image = image;
         imageView.setImage(image);
     }
@@ -127,15 +113,6 @@ public class MImageAlert extends MDialogWindow {
     }
 
     /**
-     * @return the Stage.
-     * @since 0.1.0
-     */
-    public Stage getStage() {
-        setStage();
-        return stage;
-    }
-
-    /**
      * Sets a Stage with the image in the center and the buttons at the bottom.
      *
      * @since 0.1.0
@@ -144,10 +121,8 @@ public class MImageAlert extends MDialogWindow {
         borderPane.setCenter(imageView);
         borderPane.setBottom(getButtons((int) (imageView.getFitWidth() / getButtonArrayList().size()), 0));
 
-        stage.setTitle(getAlertTitle());
-        stage.initOwner(root);
-        stage.initModality(Modality.WINDOW_MODAL);
-        stage.setScene(scene);
+        scene.getStylesheets().add(getStylesheet(getMAlertStyle()));
+        getStage().setScene(scene);
     }
 
     /**
@@ -157,6 +132,6 @@ public class MImageAlert extends MDialogWindow {
      */
     public void show() {
         setStage();
-        stage.show();
+        getStage().show();
     }
 }
