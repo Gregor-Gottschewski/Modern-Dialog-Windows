@@ -44,13 +44,13 @@ The backend also changed a lot, however, nothing changes for you, just use this 
 
 ## Download
 
-Read the official [documentation](https://github.com/GregorGott/Modern-Dialog-Windows/wiki) for more help.
+Read the [official documentation](https://github.com/GregorGott/Modern-Dialog-Windows/wiki) for more help.
+
+**Download version
+1.1.0 (recommended): [Download here](https://github.com/GregorGott/Modern-Dialog-Windows/releases/download/v1.1.0/MDialogWindows-1.1.0.jar)**
 
 **Download version
 1.0.0: [Download here](https://github.com/GregorGott/Modern-Dialog-Windows/releases/download/v1.0.0/MDialogWindows-1.0.0.jar)**
-
-**Download version (recommended)
-1.1.0: [Download here](https://github.com/GregorGott/Modern-Dialog-Windows/releases/download/v1.1.0/MDialogWindows-1.1.0.jar)**
 
 ## MAlert Sneak Peek.
 
