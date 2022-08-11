@@ -3,7 +3,6 @@ package com.gregorgott.mdialogwindows;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
-import javafx.stage.Modality;
 import javafx.stage.Window;
 
 /**
@@ -32,16 +31,13 @@ public class MScrollPaneAlert extends MDialogWindow {
      * @since 0.0.1
      */
     public MScrollPaneAlert(String title, Window root) {
-        super(350, 400);
+        super(350, 400, root);
 
         scrollPane = new ScrollPane();
         scrollPane.setFitToWidth(true);
         scrollPane.setPadding(new Insets(10, 0, 10, 0));
 
         setAlertTitle(title);
-
-        getStage().initOwner(root);
-        getStage().initModality(Modality.WINDOW_MODAL);
     }
 
     public ScrollPane getScrollPane() {

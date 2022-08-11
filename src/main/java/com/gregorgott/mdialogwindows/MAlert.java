@@ -3,7 +3,6 @@ package com.gregorgott.mdialogwindows;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.stage.Modality;
 import javafx.stage.Window;
 
 import java.util.Objects;
@@ -37,14 +36,12 @@ public class MAlert extends MDialogWindow {
      * @param root       the parent window.
      */
     public MAlert(MAlertType mAlertType, String title, Window root) {
-        super(350, 190);
+        super(350, 190, root);
 
         this.mAlertType = mAlertType;
         this.setMAlertImage();
 
         setAlertTitle(title);
-        getStage().initOwner(root);
-        getStage().initModality(Modality.WINDOW_MODAL);
     }
 
     /**

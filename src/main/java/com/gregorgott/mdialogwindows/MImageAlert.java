@@ -4,7 +4,6 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Modality;
 import javafx.stage.Window;
 
 import java.util.Objects;
@@ -40,7 +39,7 @@ public class MImageAlert extends MDialogWindow {
      * @since 0.0.1
      */
     public MImageAlert(Image image, String title, Window root) {
-        super(0, 0);
+        super(0, 0, root);
 
         borderPane = new BorderPane();
         scene = new Scene(borderPane);
@@ -48,9 +47,6 @@ public class MImageAlert extends MDialogWindow {
 
         setAlertImage(image);
         setAlertTitle(title);
-
-        getStage().initOwner(root);
-        getStage().initModality(Modality.WINDOW_MODAL);
     }
 
     /**

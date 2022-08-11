@@ -4,7 +4,6 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.web.WebView;
-import javafx.stage.Modality;
 import javafx.stage.Window;
 
 /**
@@ -38,10 +37,7 @@ public class MWebAlert extends MDialogWindow {
      * @param root  the root window of the <code>Stage</code>.
      */
     public MWebAlert(String url, String title, Window root) {
-        super(500, 450);
-
-        getStage().initOwner(root);
-        getStage().initModality(Modality.WINDOW_MODAL);
+        super(500, 450, root);
 
         webView = new WebView();
         webView.getEngine().load(url);

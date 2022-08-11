@@ -6,7 +6,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.stage.Modality;
 import javafx.stage.Window;
 
 /**
@@ -38,13 +37,10 @@ public class MTextFieldAlert extends MDialogWindow {
      * @since 0.0.1
      */
     public MTextFieldAlert(String title, Window root) {
-        super(350, 190);
+        super(350, 190, root);
 
         textField = new TextField();
         textField.setMinWidth(150);
-
-        getStage().initOwner(root);
-        getStage().initModality(Modality.WINDOW_MODAL);
 
         setAlertTitle(title);
     }

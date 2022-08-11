@@ -13,7 +13,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -23,10 +25,11 @@ import java.util.Objects;
  * This class creates a Stage with a title and the MAlertStyle. Also, the header and content text gets set by this class.
  *
  * @author GregorGott
- * @version 1.0.0
- * @since 2022-07-17
+ * @version 1.0.1
+ * @since 2022-09-11
  */
 public class MDialogWindow {
+    private final Window root;
     private final Stage stage;
     private final BorderPane borderPane;
     private final ArrayList<Button> buttonArrayList;
@@ -41,9 +44,11 @@ public class MDialogWindow {
      *
      * @param height the height of the Stage (null oder bigger).
      * @param width  the width of the Stage (null or bigger).
+     * @param root   the root window used to set alert icons.
      * @since 0.0.1
      */
-    public MDialogWindow(int width, int height) {
+    public MDialogWindow(int width, int height, Window root) {
+        this.root = root;
         // Initialize variables
         buttonArrayList = new ArrayList<>();
 
@@ -52,14 +57,16 @@ public class MDialogWindow {
         stage = new Stage();
 
         // If the width or height is null, the size will be automatically set
-        if (height > 0) {
+        if (height > 0)
             stage.setHeight(height);
-        }
-        if (width > 0) {
+
+        if (width > 0)
             stage.setWidth(width);
-        }
 
         stage.setResizable(false);
+        stage.initOwner(root);
+        stage.initModality(Modality.WINDOW_MODAL);
+        useRootWindowIcon(true);
 
         borderPane = new BorderPane();
         borderPane.setPadding(new Insets(15));
@@ -182,6 +189,25 @@ public class MDialogWindow {
         buttonArrayList.add(button);
     }
 
+    /**
+     * Clears the Stage icons when the alert should not contain the {@code root} window icon.
+     *
+     * @param b a boolean used to set the alert image.
+     * @since 1.0.1
+     */
+    public void useRootWindowIcon(boolean b) {
+        if (b)
+            stage.getIcons().addAll(((Stage) root).getIcons());
+        else
+            stage.getIcons().clear();
+    }
+
+    /**
+     * Creates a HBox with header, content and icon and returns it.
+     *
+     * @return the basic alert header.
+     * @since 1.0.0
+     */
     protected Node getHeader() {
         // return the top Node only when headline or content text is not null
         if (getHeadline() != null || getContentText() != null) {
@@ -195,22 +221,19 @@ public class MDialogWindow {
             VBox headerVBox = new VBox();
             headerVBox.setSpacing(5);
 
-            if (getHeadline() != null) {
+            if (getHeadline() != null)
                 headerVBox.getChildren().add(headlineLabel);
-            }
 
-            if (getContentText() != null) {
+            if (getContentText() != null)
                 headerVBox.getChildren().add(contentLabel);
-            }
 
             HBox hBox = new HBox();
             hBox.setSpacing(18);
             hBox.setPadding(new Insets(5));
             hBox.setId("header-box");
 
-            if (getAlertImageView() != null) {
+            if (getAlertImageView() != null)
                 hBox.getChildren().add(getAlertImageView());
-            }
             hBox.getChildren().add(headerVBox);
 
             return hBox;
@@ -219,6 +242,10 @@ public class MDialogWindow {
         }
     }
 
+    /**
+     * @return the {@code borderPane} to set the alert body.
+     * @since 1.0.0
+     */
     protected BorderPane getBorderPane() {
         return borderPane;
     }
