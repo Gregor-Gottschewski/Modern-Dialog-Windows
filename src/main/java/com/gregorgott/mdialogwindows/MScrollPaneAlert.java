@@ -1,72 +1,69 @@
 package com.gregorgott.mdialogwindows;
 
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.stage.Window;
 
 /**
- * The MScrollPaneAlert is an alert which contains a <code>ScrollPane</code> in the centre, which can be edited.
+ * The {@code MScrollPaneAlert} is an alert which contains a {@code ScrollPane} in the center, which can be called via
+ * {@code getScrollPane()}.
+ *
+ * <p> An {@code MScrollPaneAlert} with content can be created that way:
+ * <pre>
+ *     MScrollPaneAlert scrollPaneAlert = new MScrollPaneAlert("My Alert");
+ *     scrollPaneAlert.getScrollPane().setContent(new Label("Content"));
+ *     scrollPaneAlert.show();
+ * </pre>
  *
  * @author GregorGott
- * @version 1.0.0
- * @since 2022-07-17
+ * @version X.X.X
+ * @since XXXX-XX-XX (YYYY-MM-DD)
  */
 public class MScrollPaneAlert extends MDialogWindow {
     private final ScrollPane scrollPane;
 
+    /**
+     * Creates an {@code MScrollPaneAlert} without title and root window.
+     *
+     * @since 1.0.0
+     */
     public MScrollPaneAlert() {
         this(null, null);
     }
 
+    /**
+     * Creates an {@code MScrollPaneAlert} with a title, but without window owner.
+     *
+     * @param title The title of the {@code MScrollPaneAlert}.
+     * @since 1.0.0
+     */
     public MScrollPaneAlert(String title) {
         this(title, null);
     }
 
     /**
-     * Calls the parent constructor (dimensions 350x400) and sets the parent window and title.
+     * Creates an {@code MScrollPaneAlert} with a title and window owner.
      *
-     * @param title the title of the Stage.
-     * @param root  the parent window.
-     * @since 0.0.1
+     * @param title The title of the {@code MScrollPaneAlert}.
+     * @param root  The owner of the alert.
+     * @since 1.0.0
      */
     public MScrollPaneAlert(String title, Window root) {
-        super(350, 400, root);
+        super(350, 400, title, root);
 
         scrollPane = new ScrollPane();
         scrollPane.setFitToWidth(true);
         scrollPane.setPadding(new Insets(10, 0, 10, 0));
 
-        setAlertTitle(title);
+        setButtonSpacing(10);
+        getBorderPane().setCenter(scrollPane);
     }
 
+    /**
+     * @return The center scrollPane.
+     * @since 1.0.0
+     */
     public ScrollPane getScrollPane() {
         return scrollPane;
-    }
-
-    /**
-     * Adds the headline and content text for the Stage than adds a center VBox. The buttons a shown in the bottom.
-     *
-     * @since 0.0.1
-     */
-    private void setStage() {
-        getBorderPane().setTop(getHeader());
-        getBorderPane().setCenter(scrollPane);
-        getBorderPane().setBottom(getButtons(60, 10));
-
-        Scene scene = new Scene(getBorderPane());
-        scene.getStylesheets().add(getStylesheet(getMAlertStyle()));
-
-        getStage().setScene(scene);
-    }
-
-    /**
-     * Sets the Stage and shows it.
-     *
-     * @since 0.1.0
-     */
-    public void show() {
-        setStage();
-        getStage().show();
     }
 }

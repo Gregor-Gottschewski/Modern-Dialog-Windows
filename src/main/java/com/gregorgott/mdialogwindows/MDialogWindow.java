@@ -41,7 +41,7 @@ import java.util.Objects;
  *
  * @author GregorGott
  * @version X.X.X
- * @since XXXX-XX-XX
+ * @since XXXX-XX-XX (YYYY-MM-DD)
  */
 public class MDialogWindow {
     private final Window root;
@@ -51,9 +51,9 @@ public class MDialogWindow {
     private final ImageView alertImageView;
     private final Label headlineLabel;
     private final Label secondHeadlineLabel;
+    private final HBox headerBox;
     private final HBox bottomBox;
     private MAlertStyle mAlertStyle;
-    private double buttonMinWidth;
 
     /**
      * Sets the alert basic structure with a headline, second headline and an image. A Stage with given dimensions, title
@@ -66,7 +66,6 @@ public class MDialogWindow {
      */
     public MDialogWindow(int width, int height, String title, Window root) {
         this.root = root;
-        buttonMinWidth = 60;
 
         // ----- Initialize variables ----- //
         buttonArrayList = new ArrayList<>();
@@ -88,11 +87,11 @@ public class MDialogWindow {
         headerLabelsVBox.getChildren().addAll(headlineLabel, secondHeadlineLabel);
         // ----- header labels ----- //
         // ----- header box ----- //
-        HBox headerBox = new HBox();
+        headerBox = new HBox();
         headerBox.setSpacing(15);
         headerBox.setPadding(new Insets(5));
         headerBox.setId("header-box");
-        headerBox.getChildren().addAll(alertImageView, headerLabelsVBox);
+        headerBox.getChildren().addAll(headerLabelsVBox);
         // ----- header box ----- //
         // ----- bottom box ----- //
         bottomBox = new HBox();
@@ -170,11 +169,15 @@ public class MDialogWindow {
      * @since 1.0.0
      */
     public void setAlertImage(Image image) {
-        alertImageView.setImage(image);
-        // set size to null if image is null
-        int size = image != null ? 50 : 0;
-        alertImageView.setFitWidth(size);
-        alertImageView.setFitHeight(size);
+        if (image != null) {
+            ImageView imageView = new ImageView();
+            imageView.setImage(image);
+            imageView.setFitWidth(50);
+            imageView.setFitHeight(50);
+            headerBox.getChildren().add(0, imageView);
+        } else {
+            if (headerBox.getChildren().get(0).getClass() == ImageView.class) headerBox.getChildren().remove(0);
+        }
     }
 
     /**
@@ -214,23 +217,9 @@ public class MDialogWindow {
     }
 
     /**
-     * @return All buttons in the <code>buttonArrayList</code> array list.
-     * @since 1.0.0
-     */
-    public ArrayList<Button> getButtonArrayList() {
-        return buttonArrayList;
-    }
-
-    /**
-     * Sets the buttons minimum width (default 60).
-     *
-     * @param buttonMinWidth The minimum width of the buttons.
+     * @return An {@code ObservableList} with all buttons.
      * @since X.X.X
      */
-    protected void setButtonMinWidth(double buttonMinWidth) {
-        this.buttonMinWidth = buttonMinWidth;
-    }
-
     public ObservableList<Button> getButtons() {
         return FXCollections.observableList(buttonArrayList);
     }
@@ -246,7 +235,7 @@ public class MDialogWindow {
      */
     public void addButton(String text, EventHandler<ActionEvent> onClickEvent, boolean defaultButton) {
         Button button = new Button(text);
-        button.setMinWidth(buttonMinWidth);
+        button.setMinWidth(60);
         button.setOnAction(onClickEvent);
         button.setDefaultButton(defaultButton);
         bottomBox.getChildren().add(button);
@@ -260,8 +249,10 @@ public class MDialogWindow {
      * @since X.X.X
      */
     public void useRootWindowIcon(boolean b) {
-        if (b) stage.getIcons().addAll(((Stage) root).getIcons());
-        else stage.getIcons().clear();
+        if (root != null) {
+            if (b) stage.getIcons().addAll(((Stage) root).getIcons());
+            else stage.getIcons().clear();
+        }
     }
 
     /**
@@ -301,6 +292,15 @@ public class MDialogWindow {
                     "stylesheets/stylesheet-dark-rounded.css")).toExternalForm();
         }
         return css;
+    }
+
+    /**
+     * Shows the alert.
+     *
+     * @since X.X.X
+     */
+    public void show() {
+        stage.show();
     }
 
     /**

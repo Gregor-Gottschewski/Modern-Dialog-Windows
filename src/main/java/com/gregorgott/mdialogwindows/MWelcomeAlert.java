@@ -1,6 +1,8 @@
 package com.gregorgott.mdialogwindows;
 
+import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -10,48 +12,71 @@ import javafx.scene.text.Font;
 import javafx.stage.Window;
 
 /**
- * MWelcomeAlert is an MScrollPaneAlert based alert which can show e.g. the latest features of an app in widgets.
- * These widgets contain an image, header and a short content text.
+ * {@code MWelcomeAlert} is an {@link MScrollPaneAlert} based alert which can show e.g. the latest features of an app
+ * in widgets. These widgets contain an image, header and a short content text:
+ *
+ * <pre>
+ *     Image image = ...;
+ *     MWelcomeAlert mWelcomeAlert = ...;
+ *     mWelcomeAlert.addWidget(image, "More Languages added", "With this update three new languages are added.");
+ * </pre>
  *
  * @author GregorGott
- * @version 1.0.0
- * @since 2022-07-17
+ * @version X.X.X
+ * @since XXXX-XX-XX (YYYY-MM-DD)
  */
 public class MWelcomeAlert extends MScrollPaneAlert {
     private final VBox centerVBox;
 
+    /**
+     * Creates a {@code MWelcomeAlert} without title and owner window.
+     *
+     * @since 1.0.0
+     */
     public MWelcomeAlert() {
         this(null, null);
     }
 
+    /**
+     * Creates a {@code MWelcomeAlert} with a title, but without owner window.
+     *
+     * @param title The title.
+     * @since 1.0.0
+     */
     public MWelcomeAlert(String title) {
         this(title, null);
     }
 
     /**
-     * Calls the superclass with the title and root window, initializes a <code>VBox</code> which contains all widgets
-     * and sets this <code>VBox</code> as the content of the <code>ScrollPane</code>.
+     * Creates a {@code MWelcomeAlert} with a title and owner window.
      *
-     * @param title the title of the Stage.
-     * @param root  the parent window.
-     * @since 0.0.1
+     * @param title The title.
+     * @param root  The window owner.
+     * @since 1.0.0
      */
     public MWelcomeAlert(String title, Window root) {
         super(title, root);
 
-        // VBox contains all widgets
         centerVBox = new VBox();
         centerVBox.setSpacing(15);
         getScrollPane().setContent(centerVBox);
     }
 
     /**
-     * A widget contains an image, headline and a small info text.
+     * @return All children of the {@code centerVBox}.
+     * @since X.X.X
+     */
+    public ObservableList<Node> getWidgets() {
+        return centerVBox.getChildren();
+    }
+
+    /**
+     * Adds a widget with an image, headline and a small info text.
      *
-     * @param image    an 60x60 image.
-     * @param headline a headline of the widget (with text wrap).
-     * @param infoText a small info text (with text wrap).
-     * @since 0.0.1
+     * @param image    An 60x60 image.
+     * @param headline A headline of the widget.
+     * @param infoText A small info text.
+     * @since 1.0.0
      */
     public void addWidget(Image image, String headline, String infoText) {
         Label headlineLabel = new Label(headline);
@@ -72,9 +97,7 @@ public class MWelcomeAlert extends MScrollPaneAlert {
         HBox widgetHBox = new HBox();
         widgetHBox.setSpacing(10);
         widgetHBox.setAlignment(Pos.CENTER_LEFT);
-        if (image != null) {
-            widgetHBox.getChildren().add(imageView);
-        }
+        if (image != null) widgetHBox.getChildren().add(imageView);
         widgetHBox.getChildren().add(textVBox);
 
         centerVBox.getChildren().add(widgetHBox);
