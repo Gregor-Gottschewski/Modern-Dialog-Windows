@@ -4,62 +4,59 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TitledPane;
 import javafx.stage.Window;
 
 /**
- * The MMultiInformationAlert is based on the MScrollPane, because it has a scroll pane with titled panes in
- * the center. These titled panes can contain a text or a node.
+ * The {@code MMultiInformationAlert} is based on the {@link MScrollPaneAlert}, because of the {@code ScrollPane}
+ * which contains an {@code Accordion} with widgets.
  *
  * @author GregorGott
- * @version 0.0.1
- * @since 2022-06-13
+ * @version 1.1.0
+ * @since 2022-10-16 (YYYY-MM-DD)
  */
 public class MMultiInformationAlert extends MScrollPaneAlert {
     private final Accordion accordion;
 
     /**
-     * Calls the third constructor with null values.
+     * Creates an alert without a title and owner.
      *
-     * @since 0.0.1
+     * @since 1.0.0
      */
     public MMultiInformationAlert() {
         this(null, null);
     }
 
     /**
-     * Calls the third constructor with the Stage title.
+     * Creates an alert with a title, but without owner.
      *
-     * @param title the title of the Stage.
-     * @since 0.0.1
+     * @param title The title of the Stage.
+     * @since 1.0.0
      */
     public MMultiInformationAlert(String title) {
         this(title, null);
     }
 
     /**
-     * This constructor is called by every other constructor and sets the title and root window.
+     * Creates an alert with title and owner.
      *
-     * @param title the title of the Stage.
-     * @param root  the parent window of the Stage.
-     * @since 0.0.1
+     * @param title The title of the Stage.
+     * @param root  The owner of the Stage.
+     * @since 1.0.0
      */
     public MMultiInformationAlert(String title, Window root) {
         super(title, root);
 
         accordion = new Accordion();
-
-        ScrollPane scrollPane = getScrollPane();
-        scrollPane.setContent(accordion);
+        getScrollPane().setContent(accordion);
     }
 
     /**
-     * Adds a titled pane with a header and a content text.
+     * Adds a {@code TitledPane} with a header and a content text.
      *
-     * @param header      the titled pane header as String.
-     * @param contentText the content text as string.
-     * @since 0.0.1
+     * @param header      The header of the widget.
+     * @param contentText the content text of the widget.
+     * @since 1.0.0
      */
     public void addWidget(String header, String contentText) {
         Label contentTextLabel = new Label(contentText);
@@ -67,20 +64,18 @@ public class MMultiInformationAlert extends MScrollPaneAlert {
         contentTextLabel.setPadding(new Insets(10));
 
         TitledPane titledPane = new TitledPane(header, contentTextLabel);
-
         accordion.getPanes().add(titledPane);
     }
 
     /**
-     * Adds a titled pane with a header and a content node.
+     * Adds a {@code TitledPane} with a header and a content node.
      *
-     * @param header the titled pane header as String.
-     * @param node   the content node.
-     * @since 0.0.1
+     * @param header The header of the widget.
+     * @param node   The content node.
+     * @since 1.0.0
      */
     public void addWidget(String header, Node node) {
         TitledPane titledPane = new TitledPane(header, node);
-
         accordion.getPanes().add(titledPane);
     }
 }

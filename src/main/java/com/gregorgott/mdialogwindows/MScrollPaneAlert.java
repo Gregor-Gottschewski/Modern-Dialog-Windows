@@ -1,144 +1,69 @@
 package com.gregorgott.mdialogwindows;
 
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import javafx.stage.Window;
 
 /**
- * The MScrollPaneAlert is an alert which contains a scroll pane in the center, which can be edited.
+ * The {@code MScrollPaneAlert} is an alert which contains a {@code ScrollPane} in the center, which can be called via
+ * {@code getScrollPane()}.
+ *
+ * <p> An {@code MScrollPaneAlert} with content can be created that way:
+ * <pre>
+ *     MScrollPaneAlert scrollPaneAlert = new MScrollPaneAlert("My Alert");
+ *     scrollPaneAlert.getScrollPane().setContent(new Label("Content"));
+ *     scrollPaneAlert.show();
+ * </pre>
  *
  * @author GregorGott
- * @version 0.0.2
- * @since 2022-06-18
+ * @version 1.1.0
+ * @since 2022-10-16 (YYYY-MM-DD)
  */
 public class MScrollPaneAlert extends MDialogWindow {
-    private final Stage stage;
     private final ScrollPane scrollPane;
 
     /**
-     * Calls the parent constructor (dimensions 350x400), initializes the Stage and the scroll pane.
+     * Creates an {@code MScrollPaneAlert} without title and root window.
      *
-     * @since 0.0.1
+     * @since 1.0.0
      */
     public MScrollPaneAlert() {
-        super(350, 400);
-
-        stage = super.getStage();
-
-        // VBox contains all widgets
-        scrollPane = new ScrollPane();
+        this(null, null);
     }
 
     /**
-     * Calls the first constructor and sets the Stage title.
+     * Creates an {@code MScrollPaneAlert} with a title, but without window owner.
      *
-     * @param title the title of the Stage.
-     * @since 0.0.1
+     * @param title The title of the {@code MScrollPaneAlert}.
+     * @since 1.0.0
      */
     public MScrollPaneAlert(String title) {
-        this();
-
-        setAlertTitle(title);
+        this(title, null);
     }
 
     /**
-     * Calls the second constructor and sets the parent window.
+     * Creates an {@code MScrollPaneAlert} with a title and window owner.
      *
-     * @param text the title of the Stage.
-     * @param root the parent window.
-     * @since 0.0.1
+     * @param title The title of the {@code MScrollPaneAlert}.
+     * @param root  The owner of the alert.
+     * @since 1.0.0
      */
-    public MScrollPaneAlert(String text, Window root) {
-        this(text);
+    public MScrollPaneAlert(String title, Window root) {
+        super(350, 400, title, root);
 
-        stage.initOwner(root);
-        stage.initModality(Modality.WINDOW_MODAL);
-    }
-
-    public ScrollPane getScrollPane() {
-        return scrollPane;
-    }
-
-    /**
-     * Adds the headline and content text for the Stage than adds a center VBox. The buttons a shown in the bottom.
-     *
-     * @since 0.0.1
-     */
-    private void setStage() {
-        Label headerLabel = new Label(getHeadline());
-        headerLabel.setFont(new Font("Helvetica", 16));
-        Label contentTextLabel = new Label(getContentText());
-        contentTextLabel.setFont(new Font("Helvetica", 13));
-        contentTextLabel.setWrapText(true);
-
-        // VBox contains header and content text
-        VBox topVBox = new VBox();
-        topVBox.setSpacing(5);
-
-        if (getHeadline() != null) {
-            topVBox.getChildren().add(headerLabel);
-        }
-
-        if (getContentText() != null) {
-            topVBox.getChildren().add(contentTextLabel);
-        }
-
-        // HBox contains topVBox and alert image
-        HBox topHBox = new HBox();
-        topHBox.setSpacing(18);
-        topHBox.setPadding(new Insets(5));
-        topHBox.setId("header-box");
-
-        if (getAlertImageView() != null) {
-            topHBox.getChildren().add(getAlertImageView());
-        }
-
-        topHBox.getChildren().add(topVBox);
-
-        // Scroll pane contains the v box
+        scrollPane = new ScrollPane();
         scrollPane.setFitToWidth(true);
         scrollPane.setPadding(new Insets(10, 0, 10, 0));
 
-        BorderPane borderPane = new BorderPane();
-        borderPane.setPadding(new Insets(15));
-        borderPane.setBottom(getButtons(60, 10));
-        borderPane.setCenter(scrollPane);
-
-        if (getHeadline() != null || getContentText() != null || getAlertImageView() != null) {
-            borderPane.setTop(topHBox);
-        }
-
-        Scene scene = new Scene(borderPane);
-        scene.getStylesheets().add(getStylesheet(getMAlertStyle()));
-
-        stage.setTitle(getAlertTitle());
-        stage.setScene(scene);
+        setButtonSpacing(10);
+        getBorderPane().setCenter(scrollPane);
     }
 
     /**
-     * @return the Stage with all elements.
-     * @since 0.1.0
+     * @return The center scrollPane.
+     * @since 1.0.0
      */
-    public Stage getStage() {
-        setStage();
-        return stage;
-    }
-
-    /**
-     * Sets the Stage and shows it.
-     *
-     * @since 0.1.0
-     */
-    public void show() {
-        setStage();
-        stage.show();
+    public ScrollPane getScrollPane() {
+        return scrollPane;
     }
 }
