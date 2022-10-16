@@ -16,8 +16,8 @@ import javafx.stage.Window;
  * </pre>
  *
  * @author GregorGott
- * @version X.X.X
- * @since XXXX-XX-XX (YYYY-MM-DD)
+ * @version 1.1.0
+ * @since 2022-10-16 (YYYY-MM-DD)
  */
 public class MScrollPaneAlert extends MDialogWindow {
     private final ScrollPane scrollPane;

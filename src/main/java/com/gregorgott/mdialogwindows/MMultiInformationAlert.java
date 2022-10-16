@@ -12,8 +12,8 @@ import javafx.stage.Window;
  * which contains an {@code Accordion} with widgets.
  *
  * @author GregorGott
- * @version X.X.X
- * @since XXXX-XX-XX (YYYY-MM-DD)
+ * @version 1.1.0
+ * @since 2022-10-16 (YYYY-MM-DD)
  */
 public class MMultiInformationAlert extends MScrollPaneAlert {
     private final Accordion accordion;

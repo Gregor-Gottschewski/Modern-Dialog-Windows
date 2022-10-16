@@ -40,8 +40,8 @@ import java.util.Objects;
  * there is no suitable alert for your need.
  *
  * @author GregorGott
- * @version X.X.X
- * @since XXXX-XX-XX (YYYY-MM-DD)
+ * @version 1.1.0
+ * @since 2022-10-16 (YYYY-MM-DD)
  */
 public class MDialogWindow {
     private final Window root;
@@ -219,7 +219,7 @@ public class MDialogWindow {
 
     /**
      * @return An {@code ObservableList} with all buttons.
-     * @since X.X.X
+     * @since 1.1.0
      */
     public ObservableList<Button> getButtons() {
         return FXCollections.observableList(buttonArrayList);
@@ -247,7 +247,7 @@ public class MDialogWindow {
      * Clears the Stage icons or uses the owners window icon.
      *
      * @param b The boolean which defines if the owners icon should be used or not.
-     * @since X.X.X
+     * @since 1.1.0
      */
     public void useRootWindowIcon(boolean b) {
         if (root != null) {
@@ -268,7 +268,7 @@ public class MDialogWindow {
      * Sets the spacing of the {@code bottomBox}.
      *
      * @param spacing The spacing between the alert buttons.
-     * @since X.X.X
+     * @since 1.1.0
      */
     protected void setButtonSpacing(double spacing) {
         bottomBox.setSpacing(spacing);
@@ -298,7 +298,7 @@ public class MDialogWindow {
     /**
      * Shows the alert.
      *
-     * @since X.X.X
+     * @since 1.1.0
      */
     public void show() {
         stage.show();

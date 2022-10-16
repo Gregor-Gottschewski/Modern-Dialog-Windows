@@ -12,8 +12,8 @@ import javafx.stage.Window;
  * The content of the text field is returned by the {@code getText()} method.
  *
  * @author GregorGott
- * @version X.X.X
- * @since XXXX-XX-XX (YYYY-MM-DD)
+ * @version 1.1.0
+ * @since 2022-10-16 (YYYY-MM-DD)
  */
 public class MTextFieldAlert extends MDialogWindow {
     private final TextField textField;
