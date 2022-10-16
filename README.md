@@ -56,11 +56,19 @@ The backend also changed a lot, however, nothing much changed for you, just use 
 
 Read the [official documentation](https://github.com/GregorGott/Modern-Dialog-Windows/wiki) for more help.
 
-**Download version
-1.1.0 (JavaFX 19): [Download here](https://github.com/GregorGott/Modern-Dialog-Windows/releases/download/v1.1.0/MDialogWindows-1.1.0.jar)**
+### JavaFX 19 Downloads
 
-**Download version
-1.0.0 (JavaFX 18.0.2): [Download here](https://github.com/GregorGott/Modern-Dialog-Windows/releases/download/v1.0.0/MDialogWindows-1.0.0.jar)**
+| Version | Download                                                                                                               | Current |
+|---------|------------------------------------------------------------------------------------------------------------------------|---------|
+| 1.1.0   | [Download](https://github.com/GregorGott/Modern-Dialog-Windows/releases/download/v1.1.0/MDialogWindows-1.1.0_FX19.jar) | Yes     |
+
+
+### JavaFX 18 Downloads
+
+| Version | Download                                                                                                               | Current |
+|---------|------------------------------------------------------------------------------------------------------------------------|---------|
+| 1.1.0   | [Download](https://github.com/GregorGott/Modern-Dialog-Windows/releases/download/v1.1.0/MDialogWindows-1.1.0_FX18.jar) | Yes     |
+| 1.0.0   | [Download](https://github.com/GregorGott/Modern-Dialog-Windows/releases/download/v1.0.0/MDialogWindows-1.0.0.jar)      | No      |
 
 ## MAlert Sneak Peek.
 
@@ -96,5 +104,4 @@ mAlert.getStage().setResizable(true);
 Here are a few projects who are using Modern-Dialog-Windows. Append this list when your project
 uses Modern-Dialog-Windows!
 
-Word Guesser uses Modern-Dialog-Windows (Version:
-0.1.1): [Word Guesser on GitHub](https://github.com/GregorGott/Word-Guesser)
+Word Guesser uses Modern-Dialog-Windows (Version: 0.1.1): [Word Guesser on GitHub](https://github.com/GregorGott/Word-Guesser)
