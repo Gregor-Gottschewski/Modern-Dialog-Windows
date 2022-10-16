@@ -146,6 +146,14 @@ public class MDialogWindow {
     }
 
     /**
+     * @return The alert title.
+     * @since 1.1.0
+     */
+    public String getAlertTitle() {
+        return stage.getTitle();
+    }
+
+    /**
      * Sets the {@code alertTitle}.
      *
      * @param alertTitle The title of the Stage.
