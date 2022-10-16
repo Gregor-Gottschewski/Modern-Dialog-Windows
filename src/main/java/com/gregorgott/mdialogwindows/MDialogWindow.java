@@ -61,6 +61,7 @@ public class MDialogWindow {
      *
      * @param height Height of the Stage (0 or +).
      * @param width  Width of the Stage (0 or +).
+     * @param title  The title of the alert.
      * @param root   Owner used to set the alert icon.
      * @since 1.0.0
      */
@@ -212,7 +213,7 @@ public class MDialogWindow {
      * @param contentText The content text of the alert.
      * @since 1.0.0
      */
-    public void setContentText(String contentText) {
+    public void setSecondHeadline(String contentText) {
         secondHeadlineLabel.setText(contentText);
     }
 
