@@ -51,6 +51,7 @@ public class MDialogWindow {
     private final ImageView alertImageView;
     private final Label headlineLabel;
     private final Label secondHeadlineLabel;
+    private final VBox headerLabelsVBox;
     private final HBox headerBox;
     private final HBox bottomBox;
     private MAlertStyle mAlertStyle;
@@ -82,10 +83,9 @@ public class MDialogWindow {
         secondHeadlineLabel.setWrapText(true);
         secondHeadlineLabel.setFont(new Font("Helvetica", 13));
 
-        VBox headerLabelsVBox = new VBox();
+        headerLabelsVBox = new VBox();
         headerLabelsVBox.setAlignment(Pos.CENTER_LEFT);
         headerLabelsVBox.setSpacing(5);
-        headerLabelsVBox.getChildren().addAll(headlineLabel, secondHeadlineLabel);
         // ----- header labels ----- //
         // ----- header box ----- //
         headerBox = new HBox();
@@ -197,6 +197,7 @@ public class MDialogWindow {
      */
     public void setHeadline(String headline) {
         headlineLabel.setText(headline);
+        headerLabelsVBox.getChildren().add(0, headlineLabel);
     }
 
     /**
@@ -215,6 +216,7 @@ public class MDialogWindow {
      */
     public void setSecondHeadline(String contentText) {
         secondHeadlineLabel.setText(contentText);
+        headerLabelsVBox.getChildren().add(1, secondHeadlineLabel);
     }
 
     /**
