@@ -54,7 +54,7 @@ public class MDialogWindow {
     private final VBox headerLabelsVBox;
     private final HBox headerBox;
     private final HBox bottomBox;
-    private MAlertStyle mAlertStyle;
+    private AlertStyle alertStyle;
 
     /**
      * Sets the alert basic structure with a headline, second headline and an image. A Stage with given dimensions, title
@@ -71,7 +71,7 @@ public class MDialogWindow {
 
         // ----- Initialize variables ----- //
         buttonArrayList = new ArrayList<>();
-        mAlertStyle = MAlertStyle.LIGHT_ROUNDED;
+        alertStyle = AlertStyle.LIGHT_ROUNDED;
         alertImageView = new ImageView();
         // ----- Initialize variables ----- //
         // ----- header labels ----- //
@@ -104,7 +104,7 @@ public class MDialogWindow {
         borderPane.setBottom(bottomBox);
 
         Scene scene = new Scene(borderPane);
-        scene.getStylesheets().add(getStylesheet(mAlertStyle));
+        scene.getStylesheets().add(getStylesheet(alertStyle));
 
         stage = new Stage();
         stage.setScene(scene);
@@ -131,18 +131,18 @@ public class MDialogWindow {
      * @return The {@code MAlertStyle} to set the correct stylesheet.
      * @since 1.0.0
      */
-    public MAlertStyle getMAlertStyle() {
-        return mAlertStyle;
+    public AlertStyle getMAlertStyle() {
+        return alertStyle;
     }
 
     /**
      * Sets the {@code mAlertStyle}.
      *
-     * @param mAlertStyle The {@code MAlertStyle}.
+     * @param alertStyle The {@code MAlertStyle}.
      * @since 1.0.0
      */
-    public void setMAlertStyle(MAlertStyle mAlertStyle) {
-        this.mAlertStyle = mAlertStyle;
+    public void setMAlertStyle(AlertStyle alertStyle) {
+        this.alertStyle = alertStyle;
     }
 
     /**
@@ -270,7 +270,7 @@ public class MDialogWindow {
      * @return The {@code borderPane} to set the alert body.
      * @since 1.0.0
      */
-    protected BorderPane getBorderPane() {
+    public BorderPane getBorderPane() {
         return borderPane;
     }
 
@@ -287,12 +287,12 @@ public class MDialogWindow {
     /**
      * Changes the stylesheet from the Scene by returning the belonging MAlertTypes stylesheet path.
      *
-     * @param mAlertStyle The MAlertType.
+     * @param alertStyle The MAlertType.
      * @since 1.0.0
      */
-    protected String getStylesheet(MAlertStyle mAlertStyle) {
+    protected String getStylesheet(AlertStyle alertStyle) {
         String css = null;
-        switch (mAlertStyle) {
+        switch (alertStyle) {
             case LIGHT_CLASSIC -> css = Objects.requireNonNull(getClass().getResource(
                     "stylesheets/stylesheet-light-classic.css")).toExternalForm();
             case LIGHT_ROUNDED -> css = Objects.requireNonNull(getClass().getResource(
@@ -323,7 +323,7 @@ public class MDialogWindow {
         getStage().close();
     }
 
-    public enum MAlertStyle {
+    public enum AlertStyle {
         LIGHT_CLASSIC,
         LIGHT_ROUNDED,
         DARK_CLASSIC,
